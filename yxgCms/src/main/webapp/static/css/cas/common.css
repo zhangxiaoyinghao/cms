@@ -1,0 +1,25 @@
+/*min-height*/
+.min-height494{
+	min-height: 494px;
+}
+.min-height60{
+	min-height: 60px;
+}
+.bg-LTE{
+	background-color:#3c8dbc;
+	color:#fff;
+}
+/**
+.content-header>.breadcrumb {
+	float: left!important;
+	position: static!important;
+	margin-bottom: 10px;
+}
+**/
+.pageLabel{
+	font-weight:100!important;
+}
+.modal-footer{
+    background-color: #f4f4f4;
+}
+

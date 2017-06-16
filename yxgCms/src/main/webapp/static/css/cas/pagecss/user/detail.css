@@ -1,0 +1,17 @@
+.rep-bg{ background-color: #f8f8f8;border: 1px solid #e7e7e7;
+height: 50px;line-height: 50px;width: 1098px;
+margin-top: 10px;-webkit-border-radius: 4px;
+-moz-border-radius: 4px;border-radius: 4px;}
+.rep-label {width: 200px;text-align: right;}
+.m40 {margin-left:40px; color:#333 !important;}
+.rep-bg2 {
+min-height:50px;
+background-color: #f8f8f8;
+border: 1px solid #e7e7e7;width: 1098px;margin-top:10px;}
+.rep-label2 {width: 200px;text-align: right; padding-top:10px;}
+.vertical-align-top  {vertical-align:top;}
+.activeTr{
+	background-color: #fcf3cf;
+}
+.grouptitle {vertical-align: top; margin-top:10px;}
+.grouptable {width: 800px;display: inline-block;margin-left: 40px; margin-top:10px;}

@@ -6,8 +6,10 @@
   <title>${ (project.title)! }</title>
   <@tiles.insertAttribute name="header"/>
 </head>
-<body>
-  <@tiles.insertAttribute name="body"/>
-  <@tiles.insertAttribute name="footer"/>
+<body class="skin-blue sidebar-mini">
+  <div class="wrapper">
+  	<@tiles.insertAttribute name="body"/>
+  	<@tiles.insertAttribute name="footer"/>
+  </div>
 </body>
 </html>

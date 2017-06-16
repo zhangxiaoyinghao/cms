@@ -1,0 +1,103 @@
+body{
+    margin: 0;
+    padding:0;
+    background: url("../../../../images/cas/login/bg.jpg");
+    background-size:cover;  
+}
+#container{
+    width: 440px;
+    height: 510px;
+    position: absolute;
+    top: calc( 50% - 255px);
+    left:calc( 50% - 220px);
+}
+#login{
+    position: absolute;
+    top: 0;
+    left:calc( 50% - 50px);
+}
+#login-form{
+    position: absolute;
+    top: 148px;
+}
+.user-form span,.pwd-form span{
+	display:inline-block;
+	width:22px;
+	height:22px;
+	vertical-align:middle;
+	margin-right:13px;
+}
+#user-img{
+	background: url("../../../../images/cas/login/user.png");
+}
+#pwd-img{
+	background: url("../../../../images/cas/login/pwd.png");
+}
+#username,#password{
+	height: 51px;
+	width:400px;
+	border:none;
+	outline:none;
+	background-color:transparent !important;
+	border-bottom:1px solid rgba(255,255,255,.7) ;
+	font-size:16px;
+	color:#fff;
+	text-indent:4px;
+	vertical-align:middle;
+	font-weight:bold;
+}
+input::-webkit-input-placeholder{
+    color: #898d97;
+}
+.user-form,.pwd-form{
+	height:48px;
+	line-height:48px;
+}
+/* 错误提示信息 */
+.err-msg{
+	height:24px;
+	line-height:24px;
+	margin-top:5px;
+	visibility: hidden;;
+}
+.err-msg .err-img{
+	display:inline-block;
+	vertical-align:middle;
+	height:14px;
+	width:14px;
+	margin-left:40px;
+	background: url("../../../../images/cas/login/err.png");
+}
+.err-msg .error{
+	display:inline-block;
+	vertical-align:middle;
+	margin-left:8px;
+	padding-left:0;
+	font-size:14px;
+	color:#ff623c;
+	font-weight: bold;
+}
+/* 登录按钮 */
+#register{
+	width:160px;
+	height:48px;
+	font-size:16px;
+	color:#fff;
+	font-weight: bold;
+	background-color:#35a1f7;
+	border:none;
+	position:absolute;
+	right:0;
+	top:160px;
+}
+#register:hover{
+	background-color:#1488e4;
+}
+/* input:-webkit-autofill { box-shadow: 0 0 0px 1000px #23253d inset !important;}  */
+ 
+ 
+/*  input : -webkit-autofill {
+background-color : #23253d !important;
+background-image : none ;
+color : #000 ;
+} */

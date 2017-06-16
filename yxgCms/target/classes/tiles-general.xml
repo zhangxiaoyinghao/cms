@@ -5,6 +5,7 @@
 <tiles-definitions>
 	<definition name="site.*.*.*" template="/freemarker/{1}/frame/site.ftl">
 		<put-attribute name="header" value="/freemarker/{1}/include/header.ftl"/>
+		<put-attribute name="navigator" value="/freemarker/{1}/include/navigator.ftl"/>
 		<put-attribute name="footer" value="/freemarker/{1}/include/footer.ftl"/>
 		<put-attribute name="body" value="/freemarker/{1}/{2}/{3}.ftl"/>
 	</definition>

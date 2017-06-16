@@ -1,0 +1,5 @@
+.table2 { border-collapse:collapse;}
+.table2 {width: 100%;margin-bottom: 20px;}
+.table2 td {padding: 8px;line-height: 20px;text-align: left;vertical-align: top; border: 1px solid #ccc;}
+.sourcebg{background: #ffffcc;}
+.targetbg{background: #ffcc99;}
