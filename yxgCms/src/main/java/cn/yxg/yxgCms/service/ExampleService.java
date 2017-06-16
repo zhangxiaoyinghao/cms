@@ -3,14 +3,15 @@
  * /
 
 /* @(#) ExampleService.java
- * Project: yxgCms
- * Package: cn.yxg.yxgCms.service
+ * Project: yxgAppServer
+ * Package: cn.yxg.yxgAppServer.service
  * Author:  Archetype Generate
  */
-package cn.yxg.yxgCms.service;
+package cn.yxg.yxgAppServer.service;
 
 import java.util.List;
-import cn.yxg.yxgCms.entity.Example;
+
+import cn.yxg.yxgAppServer.entity.Course;
 
 /**
  * @author Archetype Generate
@@ -22,10 +23,10 @@ public interface ExampleService {
 	/**
 	 * List example.
 	 */
-	public List<Example> list();
+	public List<Course> list();
 
 	/**
 	 * Save example.
 	 */
-	public void save(Example example);
+	public void save(Course example);
 }

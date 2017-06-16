@@ -3,14 +3,15 @@
  * /
 
 /* @(#) ExampleDao.java
- * Project: yxgCms
- * Package: cn.yxg.yxgCms.dao
+ * Project: yxgAppServer
+ * Package: cn.yxg.yxgAppServer.dao
  * Author:  Archetype Generate
  */
-package cn.yxg.yxgCms.dao;
+package cn.yxg.yxgAppServer.dao;
 
-import cn.yxg.yxgCms.entity.Example;
-import cn.videoworks.commons.dao.hibernate.AdvancedHibernateDao;
+import cn.yxg.commons.dao.hibernate.AdvancedHibernateDao;
+import cn.yxg.yxgAppServer.entity.Course;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -19,5 +20,6 @@ import org.springframework.stereotype.Repository;
  * @since 1.0.0-SNAPSHOT
  */
 @Repository
-public class ExampleDao extends AdvancedHibernateDao<Example> {
+public class ExampleDao extends AdvancedHibernateDao<Course> {
+	
 }

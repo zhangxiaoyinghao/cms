@@ -3,35 +3,32 @@
  * /
 
 /* @(#) ExampleDto.java
- * Project: yxgCms
- * Package: cn.yxg.yxgCms.dto
+ * Project: yxgAppServer
+ * Package: cn.yxg.yxgAppServer.dto
  * Author:  Archetype Generate
  */
 
-package cn.yxg.yxgCms.dto;
+package cn.yxg.yxgAppServer.dto;
 
-import cn.videoworks.commons.webdev.dto.Convertable;
-import cn.yxg.yxgCms.entity.Example;
 
-public class ExampleDto implements Convertable<Example> {
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
+
+public class ExampleDto {
+
+	@NotNull
 	/** Example ID. */
-	private int id;
+	private Integer id;
 
+	@NotBlank(message="用户名不能为空")
 	/** Example name. */
 	private String name;
 
 	/** Example content. */
 	private String content;
-
-	@Override
-	public Example convert() {
-		Example example = new Example();
-		example.setId(id);
-		example.setName(name);
-		example.setContent(content);
-		return example;
-	}
 
 	public int getId() {
 		return id;
