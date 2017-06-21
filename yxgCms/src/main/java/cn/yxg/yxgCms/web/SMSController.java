@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.web;
+package cn.yxg.yxgCms.web;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.yxg.commons.webdev.http.RestResponse;
-import cn.yxg.yxgAppServer.dto.ExampleDto;
-import cn.yxg.yxgAppServer.dto.MessageVerifyDto;
-import cn.yxg.yxgAppServer.enumeration.RestResponseCode;
-import cn.yxg.yxgAppServer.service.SmsService;
-import cn.yxg.yxgAppServer.service.UserService;
-import cn.yxg.yxgAppServer.util.ResponseUtil;
+import cn.yxg.yxgCms.dto.ExampleDto;
+import cn.yxg.yxgCms.dto.MessageVerifyDto;
+import cn.yxg.yxgCms.enumeration.RestResponseCode;
+import cn.yxg.yxgCms.service.SmsService;
+import cn.yxg.yxgCms.service.UserService;
+import cn.yxg.yxgCms.util.ResponseUtil;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("yxgAppServer/sms")
+@RequestMapping("yxgCms/sms")
 public class SMSController {
 	
 	private static final Logger logger = LoggerFactory

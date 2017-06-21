@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.dto;
+package cn.yxg.yxgCms.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;

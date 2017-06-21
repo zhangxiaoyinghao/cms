@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.entity;
+package cn.yxg.yxgCms.entity;
 
 
 

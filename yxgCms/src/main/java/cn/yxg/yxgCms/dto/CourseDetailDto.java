@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.dto;
+package cn.yxg.yxgCms.dto;
 
 import java.util.ArrayList;
 import java.util.HashMap;

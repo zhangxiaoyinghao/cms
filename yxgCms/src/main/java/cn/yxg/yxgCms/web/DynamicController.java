@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.web;
+package cn.yxg.yxgCms.web;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,26 +17,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.yxg.commons.webdev.http.RestResponse;
-import cn.yxg.yxgAppServer.dto.DynamicCommentSubmitDto;
-import cn.yxg.yxgAppServer.dto.DynamicDto;
-import cn.yxg.yxgAppServer.dto.DynamicListDto;
-import cn.yxg.yxgAppServer.dto.DynamicSubmitDto;
-import cn.yxg.yxgAppServer.dto.ExampleDto;
-import cn.yxg.yxgAppServer.dto.MessageVerifyDto;
-import cn.yxg.yxgAppServer.dto.UserListDto;
-import cn.yxg.yxgAppServer.entity.User;
-import cn.yxg.yxgAppServer.enumeration.RestResponseCode;
-import cn.yxg.yxgAppServer.service.DynamicService;
-import cn.yxg.yxgAppServer.service.SmsService;
-import cn.yxg.yxgAppServer.service.UserService;
-import cn.yxg.yxgAppServer.util.ResponseUtil;
+import cn.yxg.yxgCms.dto.DynamicCommentSubmitDto;
+import cn.yxg.yxgCms.dto.DynamicDto;
+import cn.yxg.yxgCms.dto.DynamicListDto;
+import cn.yxg.yxgCms.dto.DynamicSubmitDto;
+import cn.yxg.yxgCms.dto.ExampleDto;
+import cn.yxg.yxgCms.dto.MessageVerifyDto;
+import cn.yxg.yxgCms.dto.UserListDto;
+import cn.yxg.yxgCms.entity.User;
+import cn.yxg.yxgCms.enumeration.RestResponseCode;
+import cn.yxg.yxgCms.service.DynamicService;
+import cn.yxg.yxgCms.service.SmsService;
+import cn.yxg.yxgCms.service.UserService;
+import cn.yxg.yxgCms.util.ResponseUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("yxgAppServer/dynamic")
+@RequestMapping("yxgCms/dynamic")
 public class DynamicController {
 	
 	private static final Logger logger = LoggerFactory
@@ -49,7 +49,7 @@ public class DynamicController {
     private HttpServletRequest request;
 	
 	@Resource
-	private Properties yxgAppServerConfig;
+	private Properties yxgCmsConfig;
 	
 	@Resource
 	private DynamicService dynamicServiceImpl;
@@ -65,7 +65,7 @@ public class DynamicController {
 				currentUser = userServiceImpl.getByToken(tokenStr);
 			}
 			
-			DynamicListDto dynamicListDto = dynamicServiceImpl.getDynamicList(currentUser,user,borderId,number==null?Integer.parseInt(yxgAppServerConfig.get("default.page.size").toString()):number);
+			DynamicListDto dynamicListDto = dynamicServiceImpl.getDynamicList(currentUser,user,borderId,number==null?Integer.parseInt(yxgCmsConfig.get("default.page.size").toString()):number);
 
 			return ResponseUtil.setRestResponse(RestResponseCode.SUCCESS, RestResponseCode.SUCCESS.getName(), dynamicListDto);
 		}catch(Exception e){
@@ -84,7 +84,7 @@ public class DynamicController {
 				currentUser = userServiceImpl.getByToken(tokenStr);
 			}
 			
-			UserListDto userListDto = dynamicServiceImpl.getPraiseList(currentUser,dynamic,borderId,number==null?Integer.parseInt(yxgAppServerConfig.get("default.page.size").toString()):number);
+			UserListDto userListDto = dynamicServiceImpl.getPraiseList(currentUser,dynamic,borderId,number==null?Integer.parseInt(yxgCmsConfig.get("default.page.size").toString()):number);
 
 			return ResponseUtil.setRestResponse(RestResponseCode.SUCCESS, RestResponseCode.SUCCESS.getName(), userListDto);
 		}catch(Exception e){

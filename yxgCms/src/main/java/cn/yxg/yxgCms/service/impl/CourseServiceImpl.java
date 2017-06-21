@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.service.impl;
+package cn.yxg.yxgCms.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,48 +9,48 @@ import java.util.Properties;
 import javax.annotation.Resource;
 
 import cn.yxg.commons.util.json.JsonConverter;
-import cn.yxg.yxgAppServer.dao.ClassificationCourseMappingDao;
-import cn.yxg.yxgAppServer.dao.ClassificationDao;
-import cn.yxg.yxgAppServer.dao.CourseCollectionDao;
-import cn.yxg.yxgAppServer.dao.CourseCommentDao;
-import cn.yxg.yxgAppServer.dao.CourseDao;
-import cn.yxg.yxgAppServer.dao.CourseOrderDao;
-import cn.yxg.yxgAppServer.dao.CourseRecommendDao;
-import cn.yxg.yxgAppServer.dao.StudentWorkPraiseDao;
-import cn.yxg.yxgAppServer.dao.UserConcernDao;
-import cn.yxg.yxgAppServer.dao.UserDao;
+import cn.yxg.yxgCms.dao.ClassificationCourseMappingDao;
+import cn.yxg.yxgCms.dao.ClassificationDao;
+import cn.yxg.yxgCms.dao.CourseCollectionDao;
+import cn.yxg.yxgCms.dao.CourseCommentDao;
+import cn.yxg.yxgCms.dao.CourseDao;
+import cn.yxg.yxgCms.dao.CourseOrderDao;
+import cn.yxg.yxgCms.dao.CourseRecommendDao;
+import cn.yxg.yxgCms.dao.StudentWorkPraiseDao;
+import cn.yxg.yxgCms.dao.UserConcernDao;
+import cn.yxg.yxgCms.dao.UserDao;
 
-import cn.yxg.yxgAppServer.dao.UserHomepageDao;
-import cn.yxg.yxgAppServer.dto.CategoryPageDto;
-import cn.yxg.yxgAppServer.dto.CourseCommentListDto;
-import cn.yxg.yxgAppServer.dto.CourseDetailDto;
-import cn.yxg.yxgAppServer.dto.CourseFilterInputDto;
-import cn.yxg.yxgAppServer.dto.CourseHomepageDto;
-import cn.yxg.yxgAppServer.dto.CourseListDto;
-import cn.yxg.yxgAppServer.dto.HomepageDto;
-import cn.yxg.yxgAppServer.dto.UserListDto;
+import cn.yxg.yxgCms.dao.UserHomepageDao;
+import cn.yxg.yxgCms.dto.CategoryPageDto;
+import cn.yxg.yxgCms.dto.CourseCommentListDto;
+import cn.yxg.yxgCms.dto.CourseDetailDto;
+import cn.yxg.yxgCms.dto.CourseFilterInputDto;
+import cn.yxg.yxgCms.dto.CourseHomepageDto;
+import cn.yxg.yxgCms.dto.CourseListDto;
+import cn.yxg.yxgCms.dto.HomepageDto;
+import cn.yxg.yxgCms.dto.UserListDto;
 
-import cn.yxg.yxgAppServer.entity.Classification;
-import cn.yxg.yxgAppServer.entity.ClassificationCourseMapping;
-import cn.yxg.yxgAppServer.entity.Course;
-import cn.yxg.yxgAppServer.entity.CourseCollection;
-import cn.yxg.yxgAppServer.entity.CourseComment;
-import cn.yxg.yxgAppServer.entity.CourseOrder;
-import cn.yxg.yxgAppServer.entity.CourseRecommend;
-import cn.yxg.yxgAppServer.entity.Movie;
-import cn.yxg.yxgAppServer.entity.StudentWork;
-import cn.yxg.yxgAppServer.entity.Teacher;
-import cn.yxg.yxgAppServer.entity.UserConcern;
+import cn.yxg.yxgCms.entity.Classification;
+import cn.yxg.yxgCms.entity.ClassificationCourseMapping;
+import cn.yxg.yxgCms.entity.Course;
+import cn.yxg.yxgCms.entity.CourseCollection;
+import cn.yxg.yxgCms.entity.CourseComment;
+import cn.yxg.yxgCms.entity.CourseOrder;
+import cn.yxg.yxgCms.entity.CourseRecommend;
+import cn.yxg.yxgCms.entity.Movie;
+import cn.yxg.yxgCms.entity.StudentWork;
+import cn.yxg.yxgCms.entity.Teacher;
+import cn.yxg.yxgCms.entity.UserConcern;
 
-import cn.yxg.yxgAppServer.entity.User;
-import cn.yxg.yxgAppServer.entity.UserHomepage;
-import cn.yxg.yxgAppServer.service.CourseService;
-import cn.yxg.yxgAppServer.service.HomepageService;
-import cn.yxg.yxgAppServer.service.TokenService;
-import cn.yxg.yxgAppServer.service.UserService;
-import cn.yxg.yxgAppServer.util.CommonUtil;
-import cn.yxg.yxgAppServer.util.DateUtil;
-import cn.yxg.yxgAppServer.util.MD5Util;
+import cn.yxg.yxgCms.entity.User;
+import cn.yxg.yxgCms.entity.UserHomepage;
+import cn.yxg.yxgCms.service.CourseService;
+import cn.yxg.yxgCms.service.HomepageService;
+import cn.yxg.yxgCms.service.TokenService;
+import cn.yxg.yxgCms.service.UserService;
+import cn.yxg.yxgCms.util.CommonUtil;
+import cn.yxg.yxgCms.util.DateUtil;
+import cn.yxg.yxgCms.util.MD5Util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -74,7 +74,7 @@ public class CourseServiceImpl implements CourseService{
 	ClassificationCourseMappingDao classificationCourseMappingDao;
 	
 	@Resource
-	private Properties yxgAppServerConfig;
+	private Properties yxgCmsConfig;
 	
 	@Resource
 	CourseCommentDao courseCommentDao;
@@ -191,7 +191,7 @@ public class CourseServiceImpl implements CourseService{
 				courseFilterInputDto.getPurpose()==null?null:classificationDao.get(courseFilterInputDto.getPurpose()),
 				courseFilterInputDto.getSubCategory()==null?null:classificationDao.get(courseFilterInputDto.getSubCategory()),
 				courseFilterInputDto.getBorderId(),
-				 courseFilterInputDto.getNumber()==null?Integer.parseInt(yxgAppServerConfig.get("default.page.size").toString()):courseFilterInputDto.getNumber());
+				 courseFilterInputDto.getNumber()==null?Integer.parseInt(yxgCmsConfig.get("default.page.size").toString()):courseFilterInputDto.getNumber());
 		for(Course course:courseList){
 			Map<String,Object> m = new HashMap<>();
 			m.put("id", course.getId());

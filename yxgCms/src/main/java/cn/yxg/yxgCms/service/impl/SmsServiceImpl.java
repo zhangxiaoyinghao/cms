@@ -1,18 +1,18 @@
-package cn.yxg.yxgAppServer.service.impl;
+package cn.yxg.yxgCms.service.impl;
 
 import javax.annotation.Resource;
 
-import cn.yxg.yxgAppServer.dao.TokenDao;
-import cn.yxg.yxgAppServer.dao.UserDao;
-import cn.yxg.yxgAppServer.dao.VerificationCodeDao;
-import cn.yxg.yxgAppServer.dto.MessageVerifyDto;
-import cn.yxg.yxgAppServer.entity.Token;
-import cn.yxg.yxgAppServer.entity.VerificationCode;
-import cn.yxg.yxgAppServer.service.SmsService;
-import cn.yxg.yxgAppServer.service.TokenService;
-import cn.yxg.yxgAppServer.service.UserService;
-import cn.yxg.yxgAppServer.util.CommonUtil;
-import cn.yxg.yxgAppServer.util.DateUtil;
+import cn.yxg.yxgCms.dao.TokenDao;
+import cn.yxg.yxgCms.dao.UserDao;
+import cn.yxg.yxgCms.dao.VerificationCodeDao;
+import cn.yxg.yxgCms.dto.MessageVerifyDto;
+import cn.yxg.yxgCms.entity.Token;
+import cn.yxg.yxgCms.entity.VerificationCode;
+import cn.yxg.yxgCms.service.SmsService;
+import cn.yxg.yxgCms.service.TokenService;
+import cn.yxg.yxgCms.service.UserService;
+import cn.yxg.yxgCms.util.CommonUtil;
+import cn.yxg.yxgCms.util.DateUtil;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

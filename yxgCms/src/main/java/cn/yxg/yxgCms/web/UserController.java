@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.web;
+package cn.yxg.yxgCms.web;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.yxg.commons.webdev.http.RestResponse;
-import cn.yxg.yxgAppServer.dto.ExampleDto;
-import cn.yxg.yxgAppServer.dto.LoginDto;
-import cn.yxg.yxgAppServer.dto.RegistDto;
-import cn.yxg.yxgAppServer.dto.UserInfoDto;
-import cn.yxg.yxgAppServer.dto.WechatLoginDto;
-import cn.yxg.yxgAppServer.entity.User;
-import cn.yxg.yxgAppServer.enumeration.RestResponseCode;
-import cn.yxg.yxgAppServer.service.SmsService;
-import cn.yxg.yxgAppServer.service.UserService;
-import cn.yxg.yxgAppServer.util.ResponseUtil;
+import cn.yxg.yxgCms.dto.ExampleDto;
+import cn.yxg.yxgCms.dto.LoginDto;
+import cn.yxg.yxgCms.dto.RegistDto;
+import cn.yxg.yxgCms.dto.UserInfoDto;
+import cn.yxg.yxgCms.dto.WechatLoginDto;
+import cn.yxg.yxgCms.entity.User;
+import cn.yxg.yxgCms.enumeration.RestResponseCode;
+import cn.yxg.yxgCms.service.SmsService;
+import cn.yxg.yxgCms.service.UserService;
+import cn.yxg.yxgCms.util.ResponseUtil;
 
 
 import javax.annotation.Resource;
@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("yxgAppServer/user")
+@RequestMapping("yxgCms/user")
 public class UserController {
 	
 	private static final Logger logger = LoggerFactory

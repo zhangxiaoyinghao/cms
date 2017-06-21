@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.enumeration;
+package cn.yxg.yxgCms.enumeration;
 
 public enum RestResponseCode {
 	SUCCESS(200,"成功"),

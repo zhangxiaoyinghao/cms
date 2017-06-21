@@ -1,12 +1,12 @@
-package cn.yxg.yxgAppServer.service;
+package cn.yxg.yxgCms.service;
 
 import java.util.List;
 
-import cn.yxg.yxgAppServer.dto.RegistDto;
-import cn.yxg.yxgAppServer.dto.UserInfoDto;
-import cn.yxg.yxgAppServer.dto.WechatLoginDto;
-import cn.yxg.yxgAppServer.entity.Token;
-import cn.yxg.yxgAppServer.entity.User;
+import cn.yxg.yxgCms.dto.RegistDto;
+import cn.yxg.yxgCms.dto.UserInfoDto;
+import cn.yxg.yxgCms.dto.WechatLoginDto;
+import cn.yxg.yxgCms.entity.Token;
+import cn.yxg.yxgCms.entity.User;
 
 public interface UserService {
 

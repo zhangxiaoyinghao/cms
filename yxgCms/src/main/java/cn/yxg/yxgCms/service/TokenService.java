@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.service;
+package cn.yxg.yxgCms.service;
 
 public interface TokenService {
 	

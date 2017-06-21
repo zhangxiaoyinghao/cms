@@ -3,14 +3,14 @@
  * /
 
 /* @(#) ExampleDao.java
- * Project: yxgAppServer
- * Package: cn.yxg.yxgAppServer.dao
+ * Project: yxgCms
+ * Package: cn.yxg.yxgCms.dao
  * Author:  Archetype Generate
  */
-package cn.yxg.yxgAppServer.dao;
+package cn.yxg.yxgCms.dao;
 
 import cn.yxg.commons.dao.hibernate.AdvancedHibernateDao;
-import cn.yxg.yxgAppServer.entity.Course;
+import cn.yxg.yxgCms.entity.Course;
 
 import org.springframework.stereotype.Repository;
 

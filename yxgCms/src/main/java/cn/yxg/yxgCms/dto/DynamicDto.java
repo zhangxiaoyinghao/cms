@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.dto;
+package cn.yxg.yxgCms.dto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 import cn.yxg.commons.util.json.JsonConverter;
-import cn.yxg.yxgAppServer.entity.Dynamic;
-import cn.yxg.yxgAppServer.entity.DynamicComment;
-import cn.yxg.yxgAppServer.entity.DynamicPraise;
-import cn.yxg.yxgAppServer.entity.StudentWork;
-import cn.yxg.yxgAppServer.entity.StudentWorkComment;
-import cn.yxg.yxgAppServer.entity.StudentWorkPraise;
-import cn.yxg.yxgAppServer.entity.User;
+import cn.yxg.yxgCms.entity.Dynamic;
+import cn.yxg.yxgCms.entity.DynamicComment;
+import cn.yxg.yxgCms.entity.DynamicPraise;
+import cn.yxg.yxgCms.entity.StudentWork;
+import cn.yxg.yxgCms.entity.StudentWorkComment;
+import cn.yxg.yxgCms.entity.StudentWorkPraise;
+import cn.yxg.yxgCms.entity.User;
 
 public class DynamicDto {
 	

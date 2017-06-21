@@ -3,8 +3,8 @@
  * /
 
 /* @(#) ExampleDao.java
- * Project: yxgAppServer
- * Package: cn.yxg.yxgAppServer.dao
+ * Project: yxgCms
+ * Package: cn.yxg.yxgCms.dao
  * Author:  Archetype Generate
  */
 package cn.yxg.yxgCms.dao;

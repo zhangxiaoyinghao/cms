@@ -64,14 +64,16 @@
 	<bean id="multipartResolver"
 	      class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
-	<!-- Add manual interceptors -->
-	<!--
+
+	
+	      <!-- Add manual interceptors -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/static/**/*"/>
-			<bean class="cn.videoworks.commons.webdev.interceptor.AclInterceptor"/>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/static/**/*" />
+			<bean id="requestAnalyzerInterceptor"
+				class="cn.yxg.yxgCms.interceptor.RequestAnalyzerInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-	-->
+	
 </beans>

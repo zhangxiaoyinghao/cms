@@ -3,26 +3,26 @@
  * /
 
 /* @(#) ExampleDao.java
- * Project: yxgAppServer
- * Package: cn.yxg.yxgAppServer.dao
+ * Project: yxgCms
+ * Package: cn.yxg.yxgCms.dao
  * Author:  Archetype Generate
  */
-package cn.yxg.yxgAppServer.dao;
+package cn.yxg.yxgCms.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import cn.yxg.commons.dao.hibernate.AdvancedHibernateDao;
-import cn.yxg.yxgAppServer.dto.CourseFilterInputDto;
-import cn.yxg.yxgAppServer.entity.Classification;
-import cn.yxg.yxgAppServer.entity.ClassificationCourseMapping;
-import cn.yxg.yxgAppServer.entity.Course;
-import cn.yxg.yxgAppServer.entity.CourseRecommend;
-import cn.yxg.yxgAppServer.entity.Dynamic;
-import cn.yxg.yxgAppServer.entity.DynamicComment;
-import cn.yxg.yxgAppServer.entity.Token;
-import cn.yxg.yxgAppServer.entity.User;
+import cn.yxg.yxgCms.dto.CourseFilterInputDto;
+import cn.yxg.yxgCms.entity.Classification;
+import cn.yxg.yxgCms.entity.ClassificationCourseMapping;
+import cn.yxg.yxgCms.entity.Course;
+import cn.yxg.yxgCms.entity.CourseRecommend;
+import cn.yxg.yxgCms.entity.Dynamic;
+import cn.yxg.yxgCms.entity.DynamicComment;
+import cn.yxg.yxgCms.entity.Token;
+import cn.yxg.yxgCms.entity.User;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;

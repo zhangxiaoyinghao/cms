@@ -15,7 +15,7 @@ cn.videofact = {};
 	/* Init common components.
 	 ==========================================*/
 	function initCommonComponents() {
-		initAuthority();
+		//initAuthority();
 	}
 	/* add init components.
 	 ==========================================*/

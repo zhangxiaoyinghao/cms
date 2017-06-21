@@ -1,6 +1,6 @@
-package cn.yxg.yxgAppServer.service;
+package cn.yxg.yxgCms.service;
 
-import cn.yxg.yxgAppServer.dto.MessageVerifyDto;
+import cn.yxg.yxgCms.dto.MessageVerifyDto;
 
 public interface SmsService {
 

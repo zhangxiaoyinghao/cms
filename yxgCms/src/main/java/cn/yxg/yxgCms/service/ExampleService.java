@@ -3,15 +3,15 @@
  * /
 
 /* @(#) ExampleService.java
- * Project: yxgAppServer
- * Package: cn.yxg.yxgAppServer.service
+ * Project: yxgCms
+ * Package: cn.yxg.yxgCms.service
  * Author:  Archetype Generate
  */
-package cn.yxg.yxgAppServer.service;
+package cn.yxg.yxgCms.service;
 
 import java.util.List;
 
-import cn.yxg.yxgAppServer.entity.Course;
+import cn.yxg.yxgCms.entity.Course;
 
 /**
  * @author Archetype Generate

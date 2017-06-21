@@ -1,22 +1,22 @@
-package cn.yxg.yxgAppServer.service.impl;
+package cn.yxg.yxgCms.service.impl;
 
 import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.Resource;
 
-import cn.yxg.yxgAppServer.dao.TokenDao;
-import cn.yxg.yxgAppServer.dao.UserDao;
-import cn.yxg.yxgAppServer.dto.RegistDto;
-import cn.yxg.yxgAppServer.dto.UserInfoDto;
-import cn.yxg.yxgAppServer.dto.WechatLoginDto;
-import cn.yxg.yxgAppServer.entity.Token;
-import cn.yxg.yxgAppServer.entity.User;
-import cn.yxg.yxgAppServer.service.TokenService;
-import cn.yxg.yxgAppServer.service.UserService;
-import cn.yxg.yxgAppServer.util.CommonUtil;
-import cn.yxg.yxgAppServer.util.DateUtil;
-import cn.yxg.yxgAppServer.util.MD5Util;
+import cn.yxg.yxgCms.dao.TokenDao;
+import cn.yxg.yxgCms.dao.UserDao;
+import cn.yxg.yxgCms.dto.RegistDto;
+import cn.yxg.yxgCms.dto.UserInfoDto;
+import cn.yxg.yxgCms.dto.WechatLoginDto;
+import cn.yxg.yxgCms.entity.Token;
+import cn.yxg.yxgCms.entity.User;
+import cn.yxg.yxgCms.service.TokenService;
+import cn.yxg.yxgCms.service.UserService;
+import cn.yxg.yxgCms.util.CommonUtil;
+import cn.yxg.yxgCms.util.DateUtil;
+import cn.yxg.yxgCms.util.MD5Util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService{
 	private TokenDao tokenDao;
 	
 	@Resource
-	private Properties yxgAppServerConfig;
+	private Properties yxgCmsConfig;
 
 	@Override
 	public boolean checkUserByPhone(String phone) {
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService{
 		Token token = new Token();
 		token.setUser(user);
 		token.setToken(CommonUtil.generateUuid());
-		token.setExceedTime(DateUtil.getSomeDaysLater(token.getCreatetime(),Integer.parseInt(yxgAppServerConfig.get("token.exceed.days").toString())));
+		token.setExceedTime(DateUtil.getSomeDaysLater(token.getCreatetime(),Integer.parseInt(yxgCmsConfig.get("token.exceed.days").toString())));
 		tokenDao.save(token);
 		return token;
 	}

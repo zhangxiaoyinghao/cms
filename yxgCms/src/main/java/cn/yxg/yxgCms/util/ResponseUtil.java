@@ -1,7 +1,7 @@
-package cn.yxg.yxgAppServer.util;
+package cn.yxg.yxgCms.util;
 
 import cn.yxg.commons.webdev.http.RestResponse;
-import cn.yxg.yxgAppServer.enumeration.RestResponseCode;
+import cn.yxg.yxgCms.enumeration.RestResponseCode;
 
 public class ResponseUtil {
 	public static RestResponse setRestResponse(RestResponseCode code, String message, Object data){

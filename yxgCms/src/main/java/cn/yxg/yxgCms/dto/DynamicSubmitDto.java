@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.dto;
+package cn.yxg.yxgCms.dto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,10 +9,10 @@ import java.util.Map;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import cn.yxg.commons.util.json.JsonConverter;
-import cn.yxg.yxgAppServer.entity.Dynamic;
-import cn.yxg.yxgAppServer.entity.DynamicComment;
-import cn.yxg.yxgAppServer.entity.DynamicPraise;
-import cn.yxg.yxgAppServer.entity.User;
+import cn.yxg.yxgCms.entity.Dynamic;
+import cn.yxg.yxgCms.entity.DynamicComment;
+import cn.yxg.yxgCms.entity.DynamicPraise;
+import cn.yxg.yxgCms.entity.User;
 
 public class DynamicSubmitDto {
 	

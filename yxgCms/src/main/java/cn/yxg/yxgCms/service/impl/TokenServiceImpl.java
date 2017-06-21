@@ -1,10 +1,10 @@
-package cn.yxg.yxgAppServer.service.impl;
+package cn.yxg.yxgCms.service.impl;
 
 import javax.annotation.Resource;
 
-import cn.yxg.yxgAppServer.dao.TokenDao;
-import cn.yxg.yxgAppServer.entity.Token;
-import cn.yxg.yxgAppServer.service.TokenService;
+import cn.yxg.yxgCms.dao.TokenDao;
+import cn.yxg.yxgCms.entity.Token;
+import cn.yxg.yxgCms.service.TokenService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

@@ -3,18 +3,18 @@
  * /
 
 /* @(#) ExampleServiceImpl.java
- * Project: yxgAppServer
- * Package: cn.yxg.yxgAppServer.service.impl
+ * Project: yxgCms
+ * Package: cn.yxg.yxgCms.service.impl
  * Author:  Archetype Generate
  */
-package cn.yxg.yxgAppServer.service.impl;
+package cn.yxg.yxgCms.service.impl;
 
 import javax.annotation.Resource;
 import java.util.List;
 import org.springframework.stereotype.Service;
-import cn.yxg.yxgAppServer.service.ExampleService;
-import cn.yxg.yxgAppServer.dao.ExampleDao;
-import cn.yxg.yxgAppServer.entity.Course;
+import cn.yxg.yxgCms.service.ExampleService;
+import cn.yxg.yxgCms.dao.ExampleDao;
+import cn.yxg.yxgCms.entity.Course;
 
 /**
  * @author Archetype Generate

@@ -3,12 +3,12 @@
  * /
 
 /* @(#) ExampleDto.java
- * Project: yxgAppServer
- * Package: cn.yxg.yxgAppServer.dto
+ * Project: yxgCms
+ * Package: cn.yxg.yxgCms.dto
  * Author:  Archetype Generate
  */
 
-package cn.yxg.yxgAppServer.dto;
+package cn.yxg.yxgCms.dto;
 
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.web;
+package cn.yxg.yxgCms.web;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,29 +19,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.yxg.commons.webdev.http.RestResponse;
-import cn.yxg.yxgAppServer.dto.CategoryPageDto;
-import cn.yxg.yxgAppServer.dto.CourseCommentListDto;
-import cn.yxg.yxgAppServer.dto.CourseCommentSubmitDto;
-import cn.yxg.yxgAppServer.dto.CourseDetailDto;
-import cn.yxg.yxgAppServer.dto.CourseFilterInputDto;
-import cn.yxg.yxgAppServer.dto.CourseHomepageDto;
-import cn.yxg.yxgAppServer.dto.CourseListDto;
-import cn.yxg.yxgAppServer.dto.ExampleDto;
-import cn.yxg.yxgAppServer.dto.HomepageDto;
-import cn.yxg.yxgAppServer.dto.LoginDto;
-import cn.yxg.yxgAppServer.dto.MessageVerifyDto;
-import cn.yxg.yxgAppServer.dto.RegistDto;
-import cn.yxg.yxgAppServer.dto.UserInfoDto;
-import cn.yxg.yxgAppServer.dto.UserListDto;
-import cn.yxg.yxgAppServer.dto.WechatLoginDto;
-import cn.yxg.yxgAppServer.entity.CourseRecommend;
-import cn.yxg.yxgAppServer.entity.User;
-import cn.yxg.yxgAppServer.enumeration.RestResponseCode;
-import cn.yxg.yxgAppServer.service.CourseService;
-import cn.yxg.yxgAppServer.service.HomepageService;
-import cn.yxg.yxgAppServer.service.SmsService;
-import cn.yxg.yxgAppServer.service.UserService;
-import cn.yxg.yxgAppServer.util.ResponseUtil;
+import cn.yxg.yxgCms.dto.CategoryPageDto;
+import cn.yxg.yxgCms.dto.CourseCommentListDto;
+import cn.yxg.yxgCms.dto.CourseCommentSubmitDto;
+import cn.yxg.yxgCms.dto.CourseDetailDto;
+import cn.yxg.yxgCms.dto.CourseFilterInputDto;
+import cn.yxg.yxgCms.dto.CourseHomepageDto;
+import cn.yxg.yxgCms.dto.CourseListDto;
+import cn.yxg.yxgCms.dto.ExampleDto;
+import cn.yxg.yxgCms.dto.HomepageDto;
+import cn.yxg.yxgCms.dto.LoginDto;
+import cn.yxg.yxgCms.dto.MessageVerifyDto;
+import cn.yxg.yxgCms.dto.RegistDto;
+import cn.yxg.yxgCms.dto.UserInfoDto;
+import cn.yxg.yxgCms.dto.UserListDto;
+import cn.yxg.yxgCms.dto.WechatLoginDto;
+import cn.yxg.yxgCms.entity.CourseRecommend;
+import cn.yxg.yxgCms.entity.User;
+import cn.yxg.yxgCms.enumeration.RestResponseCode;
+import cn.yxg.yxgCms.service.CourseService;
+import cn.yxg.yxgCms.service.HomepageService;
+import cn.yxg.yxgCms.service.SmsService;
+import cn.yxg.yxgCms.service.UserService;
+import cn.yxg.yxgCms.util.ResponseUtil;
 
 
 import javax.annotation.Resource;
@@ -48,7 +49,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("yxgAppServer/course")
+@RequestMapping("yxgCms/course")
 public class CourseController {
 	
 	private static final Logger logger = LoggerFactory
@@ -67,10 +68,49 @@ public class CourseController {
     private HttpServletRequest request;
 	
 	@Resource
-	private Properties yxgAppServerConfig;
+	private Properties yxgCmsConfig;
 	
 	@Resource
 	private CourseService courseServiceImpl; 
+	
+
+/**
+* @author :zy
+* @Title: listPage 
+* @Description: TODO
+* @param @param model
+* @param @return     
+* @return String     
+* @throws
+ */
+	@RequestMapping("listPage")
+	public String listPage(ModelMap model) {
+		return "site.yxgCms.course.list";
+	}
+	/**
+	 * @author :zy
+	 * @Title: infoPage 
+	 * @Description: TODO
+	 * @param @param model
+	 * @param @return     
+	 * @return String     
+	 * @throws
+	 */
+	@RequestMapping("infoPage")
+	public String infoPage(ModelMap model) {
+		return "site.yxgCms.course.info";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="homepage",method = RequestMethod.POST)
 	@ResponseBody
@@ -107,7 +147,7 @@ public class CourseController {
 	public RestResponse search(@RequestParam(value="keyword",required=false) String keyword, @RequestParam(value="borderId",required=false) Integer borderId,  @RequestParam(value="number",required=false) Integer number) {
 		try{
 
-			CourseListDto courseListDto = courseServiceImpl.getCourseList(keyword,borderId,number==null?Integer.parseInt(yxgAppServerConfig.get("default.page.size").toString()):number);
+			CourseListDto courseListDto = courseServiceImpl.getCourseList(keyword,borderId,number==null?Integer.parseInt(yxgCmsConfig.get("default.page.size").toString()):number);
 			
 			
 			return ResponseUtil.setRestResponse(RestResponseCode.SUCCESS, RestResponseCode.SUCCESS.getName(), courseListDto);
@@ -157,7 +197,7 @@ public class CourseController {
 	public RestResponse getCourseComment(@RequestParam(value="course",required=true) int course,@RequestParam(value="borderId",required=false) Integer borderId,  @RequestParam(value="number",required=false) Integer number) {
 		try{
 			
-			CourseCommentListDto courseCommentListDto = courseServiceImpl.getCourseCommentList(course,borderId,number==null?Integer.parseInt(yxgAppServerConfig.get("default.page.size").toString()):number);
+			CourseCommentListDto courseCommentListDto = courseServiceImpl.getCourseCommentList(course,borderId,number==null?Integer.parseInt(yxgCmsConfig.get("default.page.size").toString()):number);
 			
 			
 			return ResponseUtil.setRestResponse(RestResponseCode.SUCCESS, RestResponseCode.SUCCESS.getName(), courseCommentListDto);

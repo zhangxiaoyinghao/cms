@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.web;
+package cn.yxg.yxgCms.web;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,26 +19,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.yxg.commons.webdev.http.RestResponse;
-import cn.yxg.yxgAppServer.dto.DynamicListDto;
-import cn.yxg.yxgAppServer.dto.ExampleDto;
-import cn.yxg.yxgAppServer.dto.HomepageDto;
-import cn.yxg.yxgAppServer.dto.HomeworkListDto;
-import cn.yxg.yxgAppServer.dto.IdListDto;
-import cn.yxg.yxgAppServer.dto.LoginDto;
-import cn.yxg.yxgAppServer.dto.RegistDto;
-import cn.yxg.yxgAppServer.dto.StudentWorkCommentDto;
-import cn.yxg.yxgAppServer.dto.SubmitStudentWorkDto;
-import cn.yxg.yxgAppServer.dto.UserInfoDto;
-import cn.yxg.yxgAppServer.dto.UserListDto;
-import cn.yxg.yxgAppServer.dto.WechatLoginDto;
-import cn.yxg.yxgAppServer.entity.CourseRecommend;
-import cn.yxg.yxgAppServer.entity.User;
-import cn.yxg.yxgAppServer.enumeration.RestResponseCode;
-import cn.yxg.yxgAppServer.service.HomepageService;
-import cn.yxg.yxgAppServer.service.HomeworkService;
-import cn.yxg.yxgAppServer.service.SmsService;
-import cn.yxg.yxgAppServer.service.UserService;
-import cn.yxg.yxgAppServer.util.ResponseUtil;
+import cn.yxg.yxgCms.dto.DynamicListDto;
+import cn.yxg.yxgCms.dto.ExampleDto;
+import cn.yxg.yxgCms.dto.HomepageDto;
+import cn.yxg.yxgCms.dto.HomeworkListDto;
+import cn.yxg.yxgCms.dto.IdListDto;
+import cn.yxg.yxgCms.dto.LoginDto;
+import cn.yxg.yxgCms.dto.RegistDto;
+import cn.yxg.yxgCms.dto.StudentWorkCommentDto;
+import cn.yxg.yxgCms.dto.SubmitStudentWorkDto;
+import cn.yxg.yxgCms.dto.UserInfoDto;
+import cn.yxg.yxgCms.dto.UserListDto;
+import cn.yxg.yxgCms.dto.WechatLoginDto;
+import cn.yxg.yxgCms.entity.CourseRecommend;
+import cn.yxg.yxgCms.entity.User;
+import cn.yxg.yxgCms.enumeration.RestResponseCode;
+import cn.yxg.yxgCms.service.HomepageService;
+import cn.yxg.yxgCms.service.HomeworkService;
+import cn.yxg.yxgCms.service.SmsService;
+import cn.yxg.yxgCms.service.UserService;
+import cn.yxg.yxgCms.util.ResponseUtil;
 
 
 import javax.annotation.Resource;
@@ -45,7 +46,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("yxgAppServer/homework")
+@RequestMapping("yxgCms/homework")
 public class HomeworkController {
 	
 	private static final Logger logger = LoggerFactory
@@ -64,13 +65,65 @@ public class HomeworkController {
     private HttpServletRequest request;
 	
 	@Resource
-	private Properties yxgAppServerConfig;
+	private Properties yxgCmsConfig;
+	
+	
+	/**
+	* @author :zy
+	* @Title: listPage 
+	* @Description: TODO
+	* @param @param model
+	* @param @return     
+	* @return String     
+	* @throws
+	 */
+		@RequestMapping("listPage")
+		public String listPage(ModelMap model) {
+			return "site.yxgCms.homework.list";
+		}
+		/**
+		 * @author :zy
+		 * @Title: infoPage 
+		 * @Description: TODO
+		 * @param @param model
+		 * @param @return     
+		 * @return String     
+		 * @throws
+		 */
+		@RequestMapping("infoPage")
+		public String infoPage(ModelMap model) {
+			return "site.yxgCms.homework.info";
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="getHomeworkList",method = {RequestMethod.POST})
 	@ResponseBody
 	public RestResponse getHomeworkList(@RequestParam(value="number",required=false) Integer number, @RequestParam(value="borderId",required=false) Integer borderId) {
 		try{
-			HomeworkListDto homeworkDto = homeworkServiceImpl.getHomework(borderId,number==null?Integer.parseInt(yxgAppServerConfig.get("default.page.size").toString()):number);
+			HomeworkListDto homeworkDto = homeworkServiceImpl.getHomework(borderId,number==null?Integer.parseInt(yxgCmsConfig.get("default.page.size").toString()):number);
 
 			return ResponseUtil.setRestResponse(RestResponseCode.SUCCESS, RestResponseCode.SUCCESS.getName(), homeworkDto);
 		}catch(Exception e){
@@ -90,7 +143,7 @@ public class HomeworkController {
 				currentUser = userServiceImpl.getByToken(tokenStr);
 			}
 			
-			DynamicListDto dynamicListDto = homeworkServiceImpl.getStudentWorksByTime(currentUser,homework,borderId,number==null?Integer.parseInt(yxgAppServerConfig.get("default.page.size").toString()):number);
+			DynamicListDto dynamicListDto = homeworkServiceImpl.getStudentWorksByTime(currentUser,homework,borderId,number==null?Integer.parseInt(yxgCmsConfig.get("default.page.size").toString()):number);
 
 			return ResponseUtil.setRestResponse(RestResponseCode.SUCCESS, RestResponseCode.SUCCESS.getName(), dynamicListDto);
 		}catch(Exception e){

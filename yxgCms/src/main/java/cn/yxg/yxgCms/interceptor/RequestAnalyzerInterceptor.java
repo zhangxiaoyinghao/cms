@@ -19,8 +19,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  */
 public class RequestAnalyzerInterceptor extends HandlerInterceptorAdapter {
 
-	@Resource
-	private Properties casConfig;
 	/*
 	 * (non-Javadoc)
 	 * 

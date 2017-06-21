@@ -1,8 +1,8 @@
-package cn.yxg.yxgAppServer.dto;
+package cn.yxg.yxgCms.dto;
 
 import java.util.Date;
 
-import cn.yxg.yxgAppServer.entity.User;
+import cn.yxg.yxgCms.entity.User;
 
 public class UserInfoDto {
 

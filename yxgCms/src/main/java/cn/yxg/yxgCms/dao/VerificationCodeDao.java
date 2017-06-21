@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.dao;
+package cn.yxg.yxgCms.dao;
 
 import java.util.Date;
 
@@ -7,10 +7,10 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import cn.yxg.commons.dao.hibernate.AdvancedHibernateDao;
-import cn.yxg.yxgAppServer.dto.MessageVerifyDto;
-import cn.yxg.yxgAppServer.entity.User;
-import cn.yxg.yxgAppServer.entity.VerificationCode;
-import cn.yxg.yxgAppServer.util.DateUtil;
+import cn.yxg.yxgCms.dto.MessageVerifyDto;
+import cn.yxg.yxgCms.entity.User;
+import cn.yxg.yxgCms.entity.VerificationCode;
+import cn.yxg.yxgCms.util.DateUtil;
 
 @Repository
 public class VerificationCodeDao extends AdvancedHibernateDao<VerificationCode>{

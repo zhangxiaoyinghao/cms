@@ -3,23 +3,23 @@
  * /
 
 /* @(#) ExampleDao.java
- * Project: yxgAppServer
- * Package: cn.yxg.yxgAppServer.dao
+ * Project: yxgCms
+ * Package: cn.yxg.yxgCms.dao
  * Author:  Archetype Generate
  */
-package cn.yxg.yxgAppServer.dao;
+package cn.yxg.yxgCms.dao;
 
 import java.util.Date;
 import java.util.List;
 
 import cn.yxg.commons.dao.hibernate.AdvancedHibernateDao;
-import cn.yxg.yxgAppServer.entity.Course;
-import cn.yxg.yxgAppServer.entity.CourseRecommend;
-import cn.yxg.yxgAppServer.entity.Dynamic;
-import cn.yxg.yxgAppServer.entity.Homework;
-import cn.yxg.yxgAppServer.entity.Token;
-import cn.yxg.yxgAppServer.entity.User;
-import cn.yxg.yxgAppServer.entity.UserHomepage;
+import cn.yxg.yxgCms.entity.Course;
+import cn.yxg.yxgCms.entity.CourseRecommend;
+import cn.yxg.yxgCms.entity.Dynamic;
+import cn.yxg.yxgCms.entity.Homework;
+import cn.yxg.yxgCms.entity.Token;
+import cn.yxg.yxgCms.entity.User;
+import cn.yxg.yxgCms.entity.UserHomepage;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;

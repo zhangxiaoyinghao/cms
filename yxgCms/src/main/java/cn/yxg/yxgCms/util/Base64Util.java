@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.util;
+package cn.yxg.yxgCms.util;
 
 import java.io.UnsupportedEncodingException;
 

@@ -1,4 +1,4 @@
-package cn.yxg.yxgAppServer.dao;
+package cn.yxg.yxgCms.dao;
 
 import java.util.Date;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import cn.yxg.commons.dao.hibernate.AdvancedHibernateDao;
-import cn.yxg.yxgAppServer.entity.Token;
-import cn.yxg.yxgAppServer.entity.User;
+import cn.yxg.yxgCms.entity.Token;
+import cn.yxg.yxgCms.entity.User;
 
 @Repository
 public class UserDao extends AdvancedHibernateDao<User>{

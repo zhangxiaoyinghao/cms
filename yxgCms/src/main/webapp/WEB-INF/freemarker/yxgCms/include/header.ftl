@@ -49,9 +49,9 @@
 <header class="main-header">
     <!-- Logo -->
     <a href="/cas" class="logo">
-      <span class="logo-mini">CAS</span>
+      <span class="logo-mini">CMS</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">用户信息管理系统</span>
+      <span class="logo-lg">内容管理系统</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -84,13 +84,42 @@
     
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="<#if  requestPath[2] == 'organization'> active</#if>">
-          <a data_auth="cas_organization_list" href="/cas/organization/list">
-            <i class="fa fa-sitemap"></i><span>用户管理</span>
+        <li class="<#if  requestPath[2] == 'course'>active</#if>">
+          <a  href="/yxgCms/course/listPage">
+            <i class="fa fa-sitemap"></i><span>课程管理</span>
+          </a>
+        </li>
+        <li class="<#if  requestPath[2] == 'view'>active</#if>">
+          <a  href="/yxgCms/view/listPage">
+            <i class="fa fa-sitemap"></i><span>资讯管理</span>
+          </a>
+        </li>
+        <li class="<#if  requestPath[2] == 'teacher'>active</#if>">
+          <a  href="/yxgCms/teacher/listPage">
+            <i class="fa fa-sitemap"></i><span>老师管理</span>
+          </a>
+        </li>
+        <li class="<#if  requestPath[2] == 'content'>active</#if>">
+          <a  href="/yxgCms/content/listPage">
+            <i class="fa fa-sitemap"></i><span>视频管理</span>
+          </a>
+        </li>
+        <li class="<#if  requestPath[2] == 'homework'>active</#if>">
+          <a  href="/yxgCms/homework/listPage">
+            <i class="fa fa-sitemap"></i><span>作业管理</span>
+          </a>
+        </li>
+        <li class="<#if  requestPath[2] == 'ad'>active</#if>">
+          <a  href="/yxgCms/ad/listPage">
+            <i class="fa fa-sitemap"></i><span>广告位管理</span>
+          </a>
+        </li>
+        <li class="<#if  requestPath[2] == 'conf'>active</#if>">
+          <a  href="/yxgCms/conf/listPage">
+            <i class="fa fa-sitemap"></i><span>系统配置管理</span>
           </a>
         </li>
       </ul>
     </section>
     <!-- /.sidebar -->
  </aside>
-
