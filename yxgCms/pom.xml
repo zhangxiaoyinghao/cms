@@ -15,9 +15,9 @@
 		<freemarker.version>2.3.20</freemarker.version>
 		<tiles.version>2.2.2</tiles.version>
 		<cxf.version>2.7.5</cxf.version>
-		<util-commons.version>3.0.4-SNAPSHOT</util-commons.version>
-		<web-commons.version>2.1.2-SNAPSHOT</web-commons.version>
-		<dao-commons.version>2.0.4-SNAPSHOT</dao-commons.version>
+		<util-commons.version>0.0.1-SNAPSHOT</util-commons.version>
+		<web-commons.version>0.0.1-SNAPSHOT</web-commons.version>
+		<dao-commons.version>0.0.1-SNAPSHOT</dao-commons.version>
 	</properties>
 	<dependencies>
 
@@ -163,17 +163,6 @@
 			<version>${tiles.version}</version>
 		</dependency>
 
-		<!-- Apache CXF -->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
 
 		<!-- Jackson 2 for Spring 3.2.x above. -->
 		<dependency>
@@ -184,20 +173,21 @@
 
 		<!-- Inner project dependencies -->
 		<dependency>
-			<groupId>cn.videoworks.commons.util</groupId>
+			<groupId>cn.yxg.commons.util</groupId>
 			<artifactId>util-commons</artifactId>
 			<version>${util-commons.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.videoworks.commons.dao</groupId>
+			<groupId>cn.yxg.commons.dao</groupId>
 			<artifactId>dao-commons</artifactId>
 			<version>${dao-commons.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.videoworks.commons.webdev</groupId>
+			<groupId>cn.yxg.commons.webdev</groupId>
 			<artifactId>web-commons</artifactId>
 			<version>${web-commons.version}</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>${artifactId}-${version}</finalName>

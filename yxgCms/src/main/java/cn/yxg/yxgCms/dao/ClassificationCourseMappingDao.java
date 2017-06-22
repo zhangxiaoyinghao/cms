@@ -18,9 +18,6 @@ import cn.yxg.yxgCms.entity.Course;
 import cn.yxg.yxgCms.entity.CourseRecommend;
 import cn.yxg.yxgCms.entity.Token;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 /**
