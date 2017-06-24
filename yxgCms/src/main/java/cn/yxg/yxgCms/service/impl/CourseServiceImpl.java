@@ -85,40 +85,40 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	public CourseHomepageDto getCourseHomepage() {
 		CourseHomepageDto courseHomepageDto = new CourseHomepageDto();
-		List<CourseRecommend> courseRecommendList = courseRecommendDao.getCourseRecommendList(1);
-		for(CourseRecommend courseRecommend:courseRecommendList){
-			Map<String,Object> banner = new HashMap<>();
-			banner.put("courseId", courseRecommend.getCourse().getId());
-			banner.put("poster", courseRecommend.getCourse().getPoster());
-			courseHomepageDto.getBanners().add(banner);
-		}
-		List<CourseRecommend> artsRecommendList = courseRecommendDao.getCourseRecommendList(2);
-		for(CourseRecommend artsRecommend:artsRecommendList){
-			Map<String,Object> art = new HashMap<>();
-			art.put("id", artsRecommend.getCourse().getId());
-			art.put("poster", artsRecommend.getCourse().getPoster());
-			art.put("title", artsRecommend.getCourse().getName());
-			art.put("studentNumber", artsRecommend.getCourse().getCourseOrders().size());
-			courseHomepageDto.getArts().add(art);
-		}
-		List<CourseRecommend> musicRecommendList = courseRecommendDao.getCourseRecommendList(3);
-		for(CourseRecommend musicRecommend:musicRecommendList){
-			Map<String,Object> music = new HashMap<>();
-			music.put("id", musicRecommend.getCourse().getId());
-			music.put("poster", musicRecommend.getCourse().getPoster());
-			music.put("title", musicRecommend.getCourse().getName());
-			music.put("studentNumber", musicRecommend.getCourse().getCourseOrders().size());
-			courseHomepageDto.getMusic().add(music);
-		}
-		List<CourseRecommend> danceRecommendList = courseRecommendDao.getCourseRecommendList(4);
-		for(CourseRecommend danceRecommend:danceRecommendList){
-			Map<String,Object> dance = new HashMap<>();
-			dance.put("id", danceRecommend.getCourse().getId());
-			dance.put("poster", danceRecommend.getCourse().getPoster());
-			dance.put("title", danceRecommend.getCourse().getName());
-			dance.put("studentNumber", danceRecommend.getCourse().getCourseOrders().size());
-			courseHomepageDto.getDance().add(dance);
-		}
+//		List<CourseRecommend> courseRecommendList = courseRecommendDao.getCourseRecommendList(1);
+//		for(CourseRecommend courseRecommend:courseRecommendList){
+//			Map<String,Object> banner = new HashMap<>();
+//			banner.put("courseId", courseRecommend.getCourse().getId());
+//			banner.put("poster", courseRecommend.getCourse().getPoster());
+//			courseHomepageDto.getBanners().add(banner);
+//		}
+//		List<CourseRecommend> artsRecommendList = courseRecommendDao.getCourseRecommendList(2);
+//		for(CourseRecommend artsRecommend:artsRecommendList){
+//			Map<String,Object> art = new HashMap<>();
+//			art.put("id", artsRecommend.getCourse().getId());
+//			art.put("poster", artsRecommend.getCourse().getPoster());
+//			art.put("title", artsRecommend.getCourse().getName());
+//			art.put("studentNumber", artsRecommend.getCourse().getCourseOrders().size());
+//			courseHomepageDto.getArts().add(art);
+//		}
+//		List<CourseRecommend> musicRecommendList = courseRecommendDao.getCourseRecommendList(3);
+//		for(CourseRecommend musicRecommend:musicRecommendList){
+//			Map<String,Object> music = new HashMap<>();
+//			music.put("id", musicRecommend.getCourse().getId());
+//			music.put("poster", musicRecommend.getCourse().getPoster());
+//			music.put("title", musicRecommend.getCourse().getName());
+//			music.put("studentNumber", musicRecommend.getCourse().getCourseOrders().size());
+//			courseHomepageDto.getMusic().add(music);
+//		}
+//		List<CourseRecommend> danceRecommendList = courseRecommendDao.getCourseRecommendList(4);
+//		for(CourseRecommend danceRecommend:danceRecommendList){
+//			Map<String,Object> dance = new HashMap<>();
+//			dance.put("id", danceRecommend.getCourse().getId());
+//			dance.put("poster", danceRecommend.getCourse().getPoster());
+//			dance.put("title", danceRecommend.getCourse().getName());
+//			dance.put("studentNumber", danceRecommend.getCourse().getCourseOrders().size());
+//			courseHomepageDto.getDance().add(dance);
+//		}
 		
 		return courseHomepageDto;
 	}
@@ -127,37 +127,37 @@ public class CourseServiceImpl implements CourseService{
 	public CategoryPageDto getCategoryPage(int category) {
 		Classification root = classificationDao.get(category);
 		CategoryPageDto categoryPageDto = new CategoryPageDto();
-		List<Classification> list = classificationDao.getNodeClassifications(root);
-		for(Classification l:list){
-			Map<String,Object> m = new HashMap<>();
-			m.put("id", l.getId());
-			m.put("value", l.getName());
-			if(l.getParent().getKey().equals("subCategory")){
-				categoryPageDto.getSubCategory().add(m);
-			}else if(l.getParent().getKey().equals("difficulty")){
-				categoryPageDto.getDifficulty().add(m);
-			}else if(l.getParent().getKey().equals("age")){
-				categoryPageDto.getAge().add(m);
-			}else if(l.getParent().getKey().equals("purpose")){
-				categoryPageDto.getPurpose().add(m);
-			}else if(l.getParent().getKey().equals("price")){
-				categoryPageDto.getPrice().add(m);
-			}
-		}
-		List<Course> courseList = courseDao.getCoursesByCategory(root);
-		for(Course course:courseList){
-			Map<String,Object> m = new HashMap<>();
-			m.put("id", course.getId());
-			m.put("poster", course.getPoster());
-			m.put("title", course.getName());
-			m.put("studentNumber", course.getCourseOrders().size());
-			categoryPageDto.getList().add(m);
-		}
-		if(courseList.size()>0){
-			categoryPageDto.setBorderId(courseList.get(courseList.size()-1).getId());
-		}else{
-			categoryPageDto.setBorderId(0);
-		}
+//		List<Classification> list = classificationDao.getNodeClassifications(root);
+//		for(Classification l:list){
+//			Map<String,Object> m = new HashMap<>();
+//			m.put("id", l.getId());
+//			m.put("value", l.getName());
+//			if(l.getParent().getKey().equals("subCategory")){
+//				categoryPageDto.getSubCategory().add(m);
+//			}else if(l.getParent().getKey().equals("difficulty")){
+//				categoryPageDto.getDifficulty().add(m);
+//			}else if(l.getParent().getKey().equals("age")){
+//				categoryPageDto.getAge().add(m);
+//			}else if(l.getParent().getKey().equals("purpose")){
+//				categoryPageDto.getPurpose().add(m);
+//			}else if(l.getParent().getKey().equals("price")){
+//				categoryPageDto.getPrice().add(m);
+//			}
+//		}
+//		List<Course> courseList = courseDao.getCoursesByCategory(root);
+//		for(Course course:courseList){
+//			Map<String,Object> m = new HashMap<>();
+//			m.put("id", course.getId());
+//			m.put("poster", course.getPoster());
+//			m.put("title", course.getName());
+//			m.put("studentNumber", course.getCourseOrders().size());
+//			categoryPageDto.getList().add(m);
+//		}
+//		if(courseList.size()>0){
+//			categoryPageDto.setBorderId(courseList.get(courseList.size()-1).getId());
+//		}else{
+//			categoryPageDto.setBorderId(0);
+//		}
 		
 		return categoryPageDto;
 	}
@@ -165,18 +165,18 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	public CourseListDto getCourseList(String keyword,Integer borderId,Integer number) {
 		CourseListDto courseListDto = new CourseListDto();
-		List<Course> courseList = courseDao.getCourseList(keyword,borderId,number);
-		for(Course course:courseList){
-			Map<String,Object> m = new HashMap<>();
-			m.put("id", course.getId());
-			m.put("poster", course.getPoster());
-			m.put("title", course.getName());
-			m.put("studentNumber", course.getCourseOrders().size());
-			courseListDto.getList().add(m);
-		}
-		if(courseList.size()>0){
-			courseListDto.setBorderId(courseList.get(courseList.size()-1).getId());
-		}
+//		List<Course> courseList = courseDao.getCourseList(keyword,borderId,number);
+//		for(Course course:courseList){
+//			Map<String,Object> m = new HashMap<>();
+//			m.put("id", course.getId());
+//			m.put("poster", course.getPoster());
+//			m.put("title", course.getName());
+//			m.put("studentNumber", course.getCourseOrders().size());
+//			courseListDto.getList().add(m);
+//		}
+//		if(courseList.size()>0){
+//			courseListDto.setBorderId(courseList.get(courseList.size()-1).getId());
+//		}
 		return courseListDto;
 	}
 
@@ -184,27 +184,27 @@ public class CourseServiceImpl implements CourseService{
 	public CourseListDto getCourseListByFilter(
 			CourseFilterInputDto courseFilterInputDto) {
 		CourseListDto courseListDto = new CourseListDto();
-		List<Course> courseList = courseDao.getCourseListByFilter(classificationDao.get(courseFilterInputDto.getCategory()),
-				courseFilterInputDto.getAge()==null?null:classificationDao.get(courseFilterInputDto.getAge()),
-				courseFilterInputDto.getDifficulty()==null?null:classificationDao.get(courseFilterInputDto.getDifficulty()),
-				courseFilterInputDto.getPrice()==null?null:classificationDao.get(courseFilterInputDto.getPrice()),
-				courseFilterInputDto.getPurpose()==null?null:classificationDao.get(courseFilterInputDto.getPurpose()),
-				courseFilterInputDto.getSubCategory()==null?null:classificationDao.get(courseFilterInputDto.getSubCategory()),
-				courseFilterInputDto.getBorderId(),
-				 courseFilterInputDto.getNumber()==null?Integer.parseInt(yxgCmsConfig.get("default.page.size").toString()):courseFilterInputDto.getNumber());
-		for(Course course:courseList){
-			Map<String,Object> m = new HashMap<>();
-			m.put("id", course.getId());
-			m.put("poster", course.getPoster());
-			m.put("title", course.getName());
-			m.put("studentNumber", course.getCourseOrders().size());
-			courseListDto.getList().add(m);
-		}
-		if(courseList.size()>0){
-			courseListDto.setBorderId(courseList.get(courseList.size()-1).getId());
-		}else{
-			courseListDto.setBorderId(0);
-		}
+//		List<Course> courseList = courseDao.getCourseListByFilter(classificationDao.get(courseFilterInputDto.getCategory()),
+//				courseFilterInputDto.getAge()==null?null:classificationDao.get(courseFilterInputDto.getAge()),
+//				courseFilterInputDto.getDifficulty()==null?null:classificationDao.get(courseFilterInputDto.getDifficulty()),
+//				courseFilterInputDto.getPrice()==null?null:classificationDao.get(courseFilterInputDto.getPrice()),
+//				courseFilterInputDto.getPurpose()==null?null:classificationDao.get(courseFilterInputDto.getPurpose()),
+//				courseFilterInputDto.getSubCategory()==null?null:classificationDao.get(courseFilterInputDto.getSubCategory()),
+//				courseFilterInputDto.getBorderId(),
+//				 courseFilterInputDto.getNumber()==null?Integer.parseInt(yxgCmsConfig.get("default.page.size").toString()):courseFilterInputDto.getNumber());
+//		for(Course course:courseList){
+//			Map<String,Object> m = new HashMap<>();
+//			m.put("id", course.getId());
+//			m.put("poster", course.getPoster());
+//			m.put("title", course.getName());
+//			m.put("studentNumber", course.getCourseOrders().size());
+//			courseListDto.getList().add(m);
+//		}
+//		if(courseList.size()>0){
+//			courseListDto.setBorderId(courseList.get(courseList.size()-1).getId());
+//		}else{
+//			courseListDto.setBorderId(0);
+//		}
 		return courseListDto;
 
 	}
@@ -212,66 +212,66 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	public CourseDetailDto getCourseDetail(int course, User user) {
 		CourseDetailDto courseDetailDto = new CourseDetailDto();
-		Course courseObj = courseDao.get(course);
-		courseDetailDto.setDescription(courseObj.getDescription());
-		courseDetailDto.setPrice(courseObj.getPrice());
-		courseDetailDto.setTitle(courseObj.getName());
-		courseDetailDto.setStudentNumber(courseObj.getCourseOrders().size());
-		for (Teacher teacher: courseObj.getTeachers()){
-			Map<String,Object> m = new HashMap<>();
-			m.put("id", teacher.getUser().getId());
-			m.put("name", teacher.getName());
-			m.put("title", teacher.getTitle());
-			m.put("introduction", teacher.getDescription());
-			m.put("avatar", teacher.getPoster());
-			courseDetailDto.getTeacher().add(m);
-		}
-		String ageString = "";
-		String purposeString = "";
-		Classification root = null;
-		for(ClassificationCourseMapping ccm:courseObj.getClassificationCourseMappings()){
-			if(ccm.getClassification().getParent().getKey().equals("age")){
-				ageString += ccm.getClassification().getName() + ";";
-			}
-			if(ccm.getClassification().getParent().getKey().equals("purpose")){
-				purposeString += ccm.getClassification().getName() + ";";
-			}
-			root = ccm.getRoot();
-		}
-		if(!ageString.equals("")){
-			ageString = ageString.substring(0,ageString.length()-1);
-		}
-		if(!purposeString.equals("")){
-			purposeString = purposeString.substring(0,ageString.length()-1);
-		}
-		courseDetailDto.setAge(ageString);
-		courseDetailDto.setPurpose(purposeString);
-		
-		for(Movie movie:courseObj.getMovies()){
-			Map<String,Object> m = new HashMap<>();
-			m.put("id", movie.getId());
-			m.put("name", movie.getName());
-			m.put("url", movie.getUrl());
-			m.put("duration", movie.getDuration());
-			courseDetailDto.getVideos().add(m);
-		}
-		
-		if(root!=null){
-			for(Object[] result :courseDao.getRelatedCourse(root)){
-				Course c = courseDao.get((int)result[0]);
-				Map<String,Object> m = new HashMap<>();
-				m.put("id", c.getId());
-				m.put("poster",c.getPoster());
-				m.put("title", c.getName());
-				m.put("studentNumber", (long)result[1]);
-				courseDetailDto.getRelatedCourses().add(m);
-			}
-		}
-		if(user==null){
-			courseDetailDto.setJoin(false);
-		}else{
-			courseDetailDto.setJoin(courseOrderDao.hasJoined(user,courseObj));
-		}
+//		Course courseObj = courseDao.get(course);
+//		courseDetailDto.setDescription(courseObj.getDescription());
+//		courseDetailDto.setPrice(courseObj.getPrice());
+//		courseDetailDto.setTitle(courseObj.getName());
+//		courseDetailDto.setStudentNumber(courseObj.getCourseOrders().size());
+//		for (Teacher teacher: courseObj.getTeachers()){
+//			Map<String,Object> m = new HashMap<>();
+//			m.put("id", teacher.getUser().getId());
+//			m.put("name", teacher.getName());
+//			m.put("title", teacher.getTitle());
+//			m.put("introduction", teacher.getDescription());
+//			m.put("avatar", teacher.getPoster());
+//			courseDetailDto.getTeacher().add(m);
+//		}
+//		String ageString = "";
+//		String purposeString = "";
+//		Classification root = null;
+//		for(ClassificationCourseMapping ccm:courseObj.getClassificationCourseMappings()){
+//			if(ccm.getClassification().getParent().getKey().equals("age")){
+//				ageString += ccm.getClassification().getName() + ";";
+//			}
+//			if(ccm.getClassification().getParent().getKey().equals("purpose")){
+//				purposeString += ccm.getClassification().getName() + ";";
+//			}
+//			root = ccm.getRoot();
+//		}
+//		if(!ageString.equals("")){
+//			ageString = ageString.substring(0,ageString.length()-1);
+//		}
+//		if(!purposeString.equals("")){
+//			purposeString = purposeString.substring(0,ageString.length()-1);
+//		}
+//		courseDetailDto.setAge(ageString);
+//		courseDetailDto.setPurpose(purposeString);
+//		
+//		for(Movie movie:courseObj.getMovies()){
+//			Map<String,Object> m = new HashMap<>();
+//			m.put("id", movie.getId());
+//			m.put("name", movie.getName());
+//			m.put("url", movie.getUrl());
+//			m.put("duration", movie.getDuration());
+//			courseDetailDto.getVideos().add(m);
+//		}
+//		
+//		if(root!=null){
+//			for(Object[] result :courseDao.getRelatedCourse(root)){
+//				Course c = courseDao.get((int)result[0]);
+//				Map<String,Object> m = new HashMap<>();
+//				m.put("id", c.getId());
+//				m.put("poster",c.getPoster());
+//				m.put("title", c.getName());
+//				m.put("studentNumber", (long)result[1]);
+//				courseDetailDto.getRelatedCourses().add(m);
+//			}
+//		}
+//		if(user==null){
+//			courseDetailDto.setJoin(false);
+//		}else{
+//			courseDetailDto.setJoin(courseOrderDao.hasJoined(user,courseObj));
+//		}
 		return courseDetailDto;
 	}
 

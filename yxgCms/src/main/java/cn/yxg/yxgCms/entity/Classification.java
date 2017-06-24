@@ -20,8 +20,11 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "yxg_classification")
+@JsonIgnoreProperties({"children","deployCoursesMapping","localCoursesMapping"})
 public class Classification {
 	@Id
 	@GeneratedValue
@@ -49,11 +52,16 @@ public class Classification {
 //	@NotFound(action = NotFoundAction.IGNORE)
 //	private List<Course> courses;
 	
-	@OneToMany(mappedBy = "root",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<ClassificationCourseMapping> coursesUnderRoot;
+//	@OneToMany(mappedBy = "root",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private List<ClassificationCourseMapping> coursesUnderRoot;
+//	
+//	@OneToMany(mappedBy = "classification",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private List<ClassificationCourseMapping> coursesUnderNode;
+	@OneToMany(mappedBy = "classification",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<ClassificationCourseMapping> deployCoursesMapping;
 
 	@OneToMany(mappedBy = "classification",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<ClassificationCourseMapping> coursesUnderNode;
+	private List<ClassificationPreCourseMapping> localCoursesMapping;
 	
 	@Transient
 	private Integer ranking;
@@ -102,26 +110,6 @@ public class Classification {
 		this.name = name;
 	}
 
-
-
-	public List<ClassificationCourseMapping> getCoursesUnderRoot() {
-		return coursesUnderRoot;
-	}
-
-	public void setCoursesUnderRoot(
-			List<ClassificationCourseMapping> coursesUnderRoot) {
-		this.coursesUnderRoot = coursesUnderRoot;
-	}
-
-	public List<ClassificationCourseMapping> getCoursesUnderNode() {
-		return coursesUnderNode;
-	}
-
-	public void setCoursesUnderNode(
-			List<ClassificationCourseMapping> coursesUnderNode) {
-		this.coursesUnderNode = coursesUnderNode;
-	}
-
 	public String getKey() {
 		return key;
 	}
@@ -129,6 +117,22 @@ public class Classification {
 	public void setKey(String key) {
 		this.key = key;
 	}
-	
+
+	public List<ClassificationCourseMapping> getDeployCoursesMapping() {
+		return deployCoursesMapping;
+	}
+
+	public void setDeployCoursesMapping(List<ClassificationCourseMapping> deployCoursesMapping) {
+		this.deployCoursesMapping = deployCoursesMapping;
+	}
+
+	public List<ClassificationPreCourseMapping> getLocalCoursesMapping() {
+		return localCoursesMapping;
+	}
+
+	public void setLocalCoursesMapping(List<ClassificationPreCourseMapping> localCoursesMapping) {
+		this.localCoursesMapping = localCoursesMapping;
+	}
+
 	
 }

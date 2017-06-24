@@ -37,9 +37,21 @@ public class PreMovieServiceImpl implements PreMovieService {
 	}
 
 	@Override
-	public void detele(int id) {
+	public void delete(int id) {
 		// TODO Auto-generated method stub
 		dao.delete(id);
+	}
+
+	@Override
+	public void add(PreMovie movie) {
+		// TODO Auto-generated method stub
+		dao.save(movie);
+	}
+
+	@Override
+	public PreMovie get(Integer id) {
+		// TODO Auto-generated method stub
+		return dao.get(id);
 	}
 
 

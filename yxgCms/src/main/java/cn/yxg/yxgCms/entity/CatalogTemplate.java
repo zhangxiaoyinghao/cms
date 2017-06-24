@@ -35,7 +35,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @Entity
 @Table(name = "yxg_catalog_template")
-@JsonIgnoreProperties({"dictCatalogs"})
 public class CatalogTemplate {
 
 	/** 编目模板ID。 */

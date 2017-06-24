@@ -18,7 +18,11 @@ public interface PreMovieService {
 
 	List<PreMovie> execList(ContentQuery cq, Page page);
 
-	void detele(int id);
+	void delete(int id);
+
+	void add(PreMovie movie);
+
+	PreMovie get(Integer mId);
 
 	
 

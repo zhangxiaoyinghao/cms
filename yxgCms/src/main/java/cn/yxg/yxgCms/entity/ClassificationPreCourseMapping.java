@@ -7,9 +7,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-@Table(name = "yxg_classification_course_mapping")
-public class ClassificationCourseMapping {
+@Table(name = "yxg_classification_pre_course_mapping")
+@JsonIgnoreProperties({"course"})
+public class ClassificationPreCourseMapping {
 	@Id
 	@GeneratedValue
 	private int id;
@@ -24,7 +27,7 @@ public class ClassificationCourseMapping {
 	
 	@ManyToOne
 	@JoinColumn(nullable = false, name="course")
-	private Course course;
+	private PreCourse course;
 
 	public int getId() {
 		return id;
@@ -50,14 +53,13 @@ public class ClassificationCourseMapping {
 		this.classification = classification;
 	}
 
-	public Course getCourse() {
+	public PreCourse getCourse() {
 		return course;
 	}
 
-	public void setCourse(Course course) {
+	public void setCourse(PreCourse course) {
 		this.course = course;
 	}
-	
 	
 	
 }

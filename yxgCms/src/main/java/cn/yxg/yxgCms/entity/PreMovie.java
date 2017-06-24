@@ -10,8 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NotFound;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "yxg_pre_movie")
+@JsonIgnoreProperties({"course"})
 public class PreMovie {
 	@Id
 	@GeneratedValue

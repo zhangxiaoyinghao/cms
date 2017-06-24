@@ -1,7 +1,11 @@
 package cn.yxg.yxgCms.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,16 +14,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "yxg_pre_course")
+@JsonIgnoreProperties({"user","classificationPreCourseMappings"})
 public class PreCourse {
 	@Id
 	@GeneratedValue
@@ -44,17 +48,28 @@ public class PreCourse {
 	
 	private String catalog;
 	
-	private String classification;
+	@ManyToOne
+	@JoinColumn(name="catalog_template_id")
+	private CatalogTemplate catalogTemplate;
 	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	private Integer status;
+	
+	@Transient
+	private List<Map<String,Object>> classificationList = new ArrayList<>();
 	
 //	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-//	@JoinTable(name = "yxg_classification_course_mapping",
+//	@JoinTable(name = "yxg_classification_pre_course_mapping",
 //			joinColumns = @JoinColumn(name = "course"),
 //			inverseJoinColumns = @JoinColumn(name = "classification"))
 //	@NotFound(action = NotFoundAction.IGNORE)
 //	private List<Classification> classfications;
-	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<ClassificationCourseMapping> classificationCourseMappings;
+	
+	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval=true)
+	private Set<ClassificationPreCourseMapping> classificationPreCourseMappings;
 	
 	@Column(nullable = false,columnDefinition="datetime comment '创建时间'")
 	private Date createtime = new Date();
@@ -62,24 +77,34 @@ public class PreCourse {
 	@Column(nullable = false,columnDefinition="timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
 	private Date updatetime;
 	
-	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<Movie> movies;
+	@OneToMany(mappedBy = "course",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+	private List<PreMovie> movies;
 	
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinTable(name = "yxg_teacher_course_mapping",
-			joinColumns = @JoinColumn(name = "course"),
-			inverseJoinColumns = @JoinColumn(name = "teacher"))
-	@NotFound(action = NotFoundAction.IGNORE)
-	private List<Teacher> teachers;
 	
-	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<CourseCollection> courseCollections;
 	
-	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<CourseOrder> courseOrders;
+//	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	@JoinTable(name = "yxg_teacher_course_mapping",
+//			joinColumns = @JoinColumn(name = "course"),
+//			inverseJoinColumns = @JoinColumn(name = "teacher"))
+//	@NotFound(action = NotFoundAction.IGNORE)
+//	private List<Teacher> teachers;
 	
-	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<CourseComment> courseComments;
+//	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private List<CourseCollection> courseCollections;
+//	
+//	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private List<CourseOrder> courseOrders;
+//	
+//	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private List<CourseComment> courseComments;
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public int getId() {
 		return id;
@@ -131,14 +156,7 @@ public class PreCourse {
 
 
 
-	public List<ClassificationCourseMapping> getClassificationCourseMappings() {
-		return classificationCourseMappings;
-	}
-
-	public void setClassificationCourseMappings(
-			List<ClassificationCourseMapping> classificationCourseMappings) {
-		this.classificationCourseMappings = classificationCourseMappings;
-	}
+	
 
 	public Date getCreatetime() {
 		return createtime;
@@ -156,45 +174,69 @@ public class PreCourse {
 		this.updatetime = updatetime;
 	}
 
-	public List<Movie> getMovies() {
+
+	public List<PreMovie> getMovies() {
 		return movies;
 	}
 
-	public void setMovies(List<Movie> movies) {
+	public void setMovies(List<PreMovie> movies) {
 		this.movies = movies;
 	}
 
-	public List<Teacher> getTeachers() {
-		return teachers;
+	public String getUuid() {
+		return uuid;
 	}
 
-	public void setTeachers(List<Teacher> teachers) {
-		this.teachers = teachers;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
-	public List<CourseCollection> getCourseCollections() {
-		return courseCollections;
+	public String getCatalog() {
+		return catalog;
 	}
 
-	public void setCourseCollections(List<CourseCollection> courseCollections) {
-		this.courseCollections = courseCollections;
+	public void setCatalog(String catalog) {
+		this.catalog = catalog;
 	}
 
-	public List<CourseOrder> getCourseOrders() {
-		return courseOrders;
+	public Set<ClassificationPreCourseMapping> getClassificationPreCourseMappings() {
+		return classificationPreCourseMappings;
 	}
 
-	public void setCourseOrders(List<CourseOrder> courseOrders) {
-		this.courseOrders = courseOrders;
+	public void setClassificationPreCourseMappings(Set<ClassificationPreCourseMapping> classificationPreCourseMappings) {
+		this.classificationPreCourseMappings = classificationPreCourseMappings;
 	}
 
-	public List<CourseComment> getCourseComments() {
-		return courseComments;
+	public CatalogTemplate getCatalogTemplate() {
+		return catalogTemplate;
 	}
 
-	public void setCourseComments(List<CourseComment> courseComments) {
-		this.courseComments = courseComments;
+	public void setCatalogTemplate(CatalogTemplate catalogTemplate) {
+		this.catalogTemplate = catalogTemplate;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Map<String, Object>> getClassificationList() {
+		Set<ClassificationPreCourseMapping> ccms = this.getClassificationPreCourseMappings();
+		for (ClassificationPreCourseMapping ccm : ccms) {
+			Map<String,Object> ccmMap = new HashMap<>();
+			ccmMap.put("root", ccm.getRoot().getId());
+			ccmMap.put("classification", ccm.getClassification().getId());
+			classificationList.add(ccmMap);
+		}
+		return classificationList;
+	}
+
+	public void setClassificationList(List<Map<String, Object>> classificationList) {
+		this.classificationList = classificationList;
+	}
+
 	
 }

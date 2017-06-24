@@ -58,21 +58,21 @@ public class Course {
 	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Movie> movies;
 	
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinTable(name = "yxg_teacher_course_mapping",
-			joinColumns = @JoinColumn(name = "course"),
-			inverseJoinColumns = @JoinColumn(name = "teacher"))
-	@NotFound(action = NotFoundAction.IGNORE)
-	private List<Teacher> teachers;
-	
-	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<CourseCollection> courseCollections;
-	
-	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<CourseOrder> courseOrders;
-	
-	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<CourseComment> courseComments;
+//	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	@JoinTable(name = "yxg_teacher_course_mapping",
+//			joinColumns = @JoinColumn(name = "course"),
+//			inverseJoinColumns = @JoinColumn(name = "teacher"))
+//	@NotFound(action = NotFoundAction.IGNORE)
+//	private List<Teacher> teachers;
+//	
+//	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private List<CourseCollection> courseCollections;
+//	
+//	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private List<CourseOrder> courseOrders;
+//	
+//	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private List<CourseComment> courseComments;
 
 	public int getId() {
 		return id;
@@ -124,14 +124,6 @@ public class Course {
 
 
 
-	public List<ClassificationCourseMapping> getClassificationCourseMappings() {
-		return classificationCourseMappings;
-	}
-
-	public void setClassificationCourseMappings(
-			List<ClassificationCourseMapping> classificationCourseMappings) {
-		this.classificationCourseMappings = classificationCourseMappings;
-	}
 
 	public Date getCreatetime() {
 		return createtime;
@@ -157,37 +149,12 @@ public class Course {
 		this.movies = movies;
 	}
 
-	public List<Teacher> getTeachers() {
-		return teachers;
+	public List<ClassificationCourseMapping> getClassificationCourseMappings() {
+		return classificationCourseMappings;
 	}
 
-	public void setTeachers(List<Teacher> teachers) {
-		this.teachers = teachers;
+	public void setClassificationCourseMappings(List<ClassificationCourseMapping> classificationCourseMappings) {
+		this.classificationCourseMappings = classificationCourseMappings;
 	}
 
-	public List<CourseCollection> getCourseCollections() {
-		return courseCollections;
-	}
-
-	public void setCourseCollections(List<CourseCollection> courseCollections) {
-		this.courseCollections = courseCollections;
-	}
-
-	public List<CourseOrder> getCourseOrders() {
-		return courseOrders;
-	}
-
-	public void setCourseOrders(List<CourseOrder> courseOrders) {
-		this.courseOrders = courseOrders;
-	}
-
-	public List<CourseComment> getCourseComments() {
-		return courseComments;
-	}
-
-	public void setCourseComments(List<CourseComment> courseComments) {
-		this.courseComments = courseComments;
-	}
-	
-	
 }
