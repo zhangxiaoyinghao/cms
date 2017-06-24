@@ -127,4 +127,11 @@ public class UserServiceImpl implements UserService{
 		tokenDao.delete(deleteTokens);
 	}
 
+
+	@Override
+	public User get(int i) {
+		// TODO Auto-generated method stub
+		return userDao.get(i);
+	}
+
 }

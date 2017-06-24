@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "yxg_movie")
-public class Movie {
+@Table(name = "yxg_pre_movie")
+public class PreMovie {
 	@Id
 	@GeneratedValue
 	private int id;
@@ -33,8 +33,8 @@ public class Movie {
 	private Date updatetime;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false,name="course_id")
-	private Course course;
+	@JoinColumn(nullable = true,name="course_id")
+	private PreCourse course;
 	
 	private int sequence;
 	
@@ -96,11 +96,12 @@ public class Movie {
 		this.updatetime = updatetime;
 	}
 
-	public Course getCourse() {
+
+	public PreCourse getCourse() {
 		return course;
 	}
 
-	public void setCourse(Course course) {
+	public void setCourse(PreCourse course) {
 		this.course = course;
 	}
 

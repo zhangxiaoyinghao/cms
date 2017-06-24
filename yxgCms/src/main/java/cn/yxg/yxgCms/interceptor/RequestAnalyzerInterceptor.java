@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import cn.yxg.yxgCms.service.UserService;
+
 /**
  * 用于页面导航高亮需要的拦截器
  * 
@@ -18,6 +20,9 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * 
  */
 public class RequestAnalyzerInterceptor extends HandlerInterceptorAdapter {
+	
+	@Resource
+	private UserService userServiceImpl;
 
 	/*
 	 * (non-Javadoc)
@@ -36,6 +41,7 @@ public class RequestAnalyzerInterceptor extends HandlerInterceptorAdapter {
 		String[] paths = request.getRequestURI().split("/");
 		System.arraycopy(paths,0,requestPath,0,paths.length);
 		request.setAttribute("requestPath", requestPath);
+		request.setAttribute("userInfo", userServiceImpl.get(6));
 		return true;
 	}
 

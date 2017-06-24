@@ -23,5 +23,7 @@ public interface UserService {
 
 	void deleteToken(User user);
 
+	User get(int i);
+
 
 }

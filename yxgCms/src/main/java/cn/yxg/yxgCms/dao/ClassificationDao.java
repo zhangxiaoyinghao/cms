@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import cn.yxg.commons.dao.hibernate.AdvancedHibernateDao;
+import cn.yxg.yxgCms.dto.ClassificationDto;
 import cn.yxg.yxgCms.entity.Classification;
 import cn.yxg.yxgCms.entity.Course;
 import cn.yxg.yxgCms.entity.CourseRecommend;
@@ -34,6 +35,18 @@ public class ClassificationDao extends AdvancedHibernateDao<Classification> {
 	public List<Classification> getNodeClassifications(Classification root) {
 		Criteria criteria = this.getCurrentSession().createCriteria(Classification.class).createAlias("parent", "pa");
 		criteria.add(Restrictions.eq("pa.parent", root));
+
+		return criteria.list();
+	}
+
+	public List<Classification> get(ClassificationDto dto) {
+		// TODO Auto-generated method stub
+		Criteria criteria = this.getCurrentSession().createCriteria(Classification.class).createAlias("parent", "pa");
+		criteria.add(Restrictions.like("pa.name", "%"+dto.getName()+"%"));
+		if(dto.getParentId()!=null){
+			criteria.createCriteria("pa.parent", "par");
+			criteria.add(Restrictions.eq("par.id", dto.getParentId()));
+		}
 
 		return criteria.list();
 	}

@@ -21,39 +21,25 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 @Entity
-@Table(name = "yxg_classification")
-public class Classification {
+@Table(name = "yxg_pre_classification")
+public class PreClassification {
 	@Id
 	@GeneratedValue
 	private int id;
 	
-	//@Column(name="parent_id",nullable = true,columnDefinition="int default null comment '父节点id'")
-	//private int parentId;
 	@ManyToOne
 	@JoinColumn(nullable = true, name="parent")
-	private Classification parent;
+	private PreClassification parent;
 	
 	@OneToMany(mappedBy = "parent",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private Set<Classification> children;
+	private Set<PreClassification> children;
 	
 	@Column(nullable = false,columnDefinition="varchar(20) default '' comment '节点名称'")
 	private String name;
 	
 	@Column(nullable = true,columnDefinition="varchar(20) default '' comment '节点key'")
 	private String key;
-	
-//	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-//	@JoinTable(name = "yxg_classification_course_mapping",
-//			joinColumns = @JoinColumn(name = "classification"),
-//			inverseJoinColumns = @JoinColumn(name = "course"))
-//	@NotFound(action = NotFoundAction.IGNORE)
-//	private List<Course> courses;
-	
-	@OneToMany(mappedBy = "root",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<ClassificationCourseMapping> coursesUnderRoot;
 
-	@OneToMany(mappedBy = "classification",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<ClassificationCourseMapping> coursesUnderNode;
 	
 	@Transient
 	private Integer ranking;
@@ -76,21 +62,21 @@ public class Classification {
 		this.id = id;
 	}
 
-	public Classification getParent() {
+	public PreClassification getParent() {
 		return parent;
 	}
 
-	public void setParent(Classification parent) {
+	public void setParent(PreClassification parent) {
 		this.parent = parent;
 	}
 
 
 
-	public Set<Classification> getChildren() {
+	public Set<PreClassification> getChildren() {
 		return children;
 	}
 
-	public void setChildren(Set<Classification> children) {
+	public void setChildren(Set<PreClassification> children) {
 		this.children = children;
 	}
 
@@ -100,26 +86,6 @@ public class Classification {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-
-
-	public List<ClassificationCourseMapping> getCoursesUnderRoot() {
-		return coursesUnderRoot;
-	}
-
-	public void setCoursesUnderRoot(
-			List<ClassificationCourseMapping> coursesUnderRoot) {
-		this.coursesUnderRoot = coursesUnderRoot;
-	}
-
-	public List<ClassificationCourseMapping> getCoursesUnderNode() {
-		return coursesUnderNode;
-	}
-
-	public void setCoursesUnderNode(
-			List<ClassificationCourseMapping> coursesUnderNode) {
-		this.coursesUnderNode = coursesUnderNode;
 	}
 
 	public String getKey() {
