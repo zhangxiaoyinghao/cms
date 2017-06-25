@@ -303,11 +303,9 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	public void addCourseOrder(User user, int course) {
 		Course courseObj = courseDao.get(course);
-		
 		if(courseOrderDao.hasJoined(user,courseObj)){
 			return;
 		}
-		
 		CourseOrder courseOrder = new CourseOrder();
 		courseOrder.setCourse(courseObj);
 		courseOrder.setOrderCode(CommonUtil.generateUuid());
@@ -340,5 +338,30 @@ public class CourseServiceImpl implements CourseService{
 		courseCollectionDao.save(courseCollection);
 		
 	}
+
+	@Override
+	public void save(Course course) {
+		// TODO Auto-generated method stub
+		courseDao.save(course);
+	}
+
+	@Override
+	public void delete(String uuid) {
+		// TODO Auto-generated method stub
+		Course course = find(uuid);
+		courseDao.delete(course);
+	}
+	@Override
+	public Course find(String uuid) {
+		// TODO Auto-generated method stub
+		String hql = "from Course where uuid=?";
+		List<Course> courses = courseDao.findByHQL(hql, 0, 0, uuid);
+		if(courses!=null&&courses.size()>0){
+			return courses.get(0);
+		}
+		return null;
+	}
+
+
 
 }

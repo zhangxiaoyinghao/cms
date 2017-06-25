@@ -1,15 +1,13 @@
 package cn.yxg.yxgCms.web;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
-import java.util.UUID;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,23 +32,10 @@ import cn.yxg.yxgCms.dto.CourseDetailDto;
 import cn.yxg.yxgCms.dto.CourseFilterInputDto;
 import cn.yxg.yxgCms.dto.CourseHomepageDto;
 import cn.yxg.yxgCms.dto.CourseListDto;
-import cn.yxg.yxgCms.dto.ExampleDto;
-import cn.yxg.yxgCms.dto.HomepageDto;
-import cn.yxg.yxgCms.dto.LoginDto;
-import cn.yxg.yxgCms.dto.MessageVerifyDto;
-import cn.yxg.yxgCms.dto.MovieDto;
 import cn.yxg.yxgCms.dto.PreCourseDto;
-import cn.yxg.yxgCms.dto.RegistDto;
-import cn.yxg.yxgCms.dto.UserInfoDto;
-import cn.yxg.yxgCms.dto.UserListDto;
-import cn.yxg.yxgCms.dto.WechatLoginDto;
-import cn.yxg.yxgCms.entity.ClassificationPreCourseMapping;
-import cn.yxg.yxgCms.entity.CourseRecommend;
 import cn.yxg.yxgCms.entity.PreCourse;
-import cn.yxg.yxgCms.entity.PreMovie;
 import cn.yxg.yxgCms.entity.User;
 import cn.yxg.yxgCms.enumeration.RestResponseCode;
-import cn.yxg.yxgCms.query.ContentQuery;
 import cn.yxg.yxgCms.query.CourseQuery;
 import cn.yxg.yxgCms.service.ClassificationService;
 import cn.yxg.yxgCms.service.CourseService;
@@ -60,11 +45,6 @@ import cn.yxg.yxgCms.service.PreMovieService;
 import cn.yxg.yxgCms.service.SmsService;
 import cn.yxg.yxgCms.service.UserService;
 import cn.yxg.yxgCms.util.ResponseUtil;
-
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("yxgCms/course")
@@ -163,41 +143,17 @@ public class PreCourseController {
 		}
 		return restResponse;
 	}
+	
 	/**
 	 * 
-	 	视频视频查询
+	 	视频删除
 	 * 
 	 * @param cq
 	 * @return
 	 */
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public RestResponse findContents(@PathVariable int id) {
-		logger.info("删除课程参数：【" + id + "】");
-		RestResponse restResponse = new RestResponse();
-		try {
-			preCourseServiceImpl.delete(id);
-			// TODO
-			restResponse.setStatusCode(ResponseStatusCode.OK);
-			restResponse.setMessage("删除课程成功！");
-		} catch (Exception e) {
-			e.printStackTrace();
-			restResponse
-			.setStatusCode(ResponseStatusCode.INTERNAL_SERVER_ERROR);
-			restResponse.setMessage("删除课程异常！");
-		}
-		return restResponse;
-	}
-	/**
-	 * 
-	 	视频视频查询
-	 * 
-	 * @param cq
-	 * @return
-	 */
-	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public RestResponse findContents(@PathVariable int id) {
+	public RestResponse delete(@PathVariable int id) {
 		logger.info("删除课程参数：【" + id + "】");
 		RestResponse restResponse = new RestResponse();
 		try {
@@ -226,18 +182,93 @@ public class PreCourseController {
 	public RestResponse addContent(@PathVariable int id,@PathVariable int action) {
 		logger.info("审核课程参数：【" + id+","+ action + "】");
 		RestResponse restResponse = new RestResponse();
+		restResponse.setStatusCode(ResponseStatusCode.OK);
+		restResponse.setMessage("审核课程成功！");
 		try {
 			PreCourse course = preCourseServiceImpl.get(id);
-			course.setStatus(action);
-			if(action==1){//销售
-				preCourseServiceImpl.execDeploy(course);
+			if(checkCourseStatus(course,action)){
+				course.setStatus(action);
+				if(action==1){//销售
+					preCourseServiceImpl.execDeploy(course);
+				}else if(action==2){//停售
+					preCourseServiceImpl.execStop(course);
+				}
+				preCourseServiceImpl.update(course);
+			}else{
+				logger.error("check course status ["+course.getStatus()+" to "+action+"] failed!");
+				restResponse.setStatusCode(ResponseStatusCode.INTERNAL_SERVER_ERROR);
+				restResponse.setMessage("审核课程失败！");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			restResponse.setStatusCode(ResponseStatusCode.INTERNAL_SERVER_ERROR);
+			restResponse.setMessage("审核课程异常！");
+		}
+		return restResponse;
+	}
+	private boolean checkCourseStatus(PreCourse course, int action) {
+		// TODO Auto-generated method stub
+		switch (course.getStatus()) {
+		case 0://未审核
+			if(action==2){
+				return false;
+			}
+			break;
+		case 1://销售中
+			if(action==0){
+				return false;
+			}
+			break;
+		case 2://停售
+			if(action==0){
+				return false;
+			}
+			break;
+		case 3://修改待审核
+			if(action==2||action==0){
+				return false;
+			}
+			break;
+
+		default:
+			break;
+		} 
+		return true;
+	}
+	/**
+	 * 
+	 * 新增课程
+	 * 
+	 * @param cq
+	 * @return
+	 */
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addContent(@RequestBody @Valid PreCourseDto dto,BindingResult bResult) {
+		logger.info("新增课程参数：【" + JsonConverter.format(dto) + "】");
+		RestResponse restResponse = new RestResponse();
+		if(bResult.hasErrors()){
+			restResponse.setStatusCode(ResponseStatusCode.BAD_REQUEST);
+			restResponse.setMessage(bResult.getFieldError().getDefaultMessage());
+			return restResponse;
+		}
+		try {
+			if(preCourseServiceImpl.checkMovie(dto)){
+				preCourseServiceImpl.execAdd(dto);
+				restResponse.setStatusCode(ResponseStatusCode.OK);
+				restResponse.setMessage("新增课程成功！");
+			}else{
+				logger.error("check movie "+JsonConverter.format(dto.getMovies())+" failed!");
+				restResponse.setStatusCode(ResponseStatusCode.OK);
+				restResponse.setMessage("新增课程失败！");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			restResponse
 			.setStatusCode(ResponseStatusCode.INTERNAL_SERVER_ERROR);
-			restResponse.setMessage("审核课程异常！");
+			restResponse.setMessage("新增课程异常！");
 		}
 		return restResponse;
 	}

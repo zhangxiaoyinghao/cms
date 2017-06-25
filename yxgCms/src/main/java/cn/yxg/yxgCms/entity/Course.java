@@ -2,6 +2,7 @@ package cn.yxg.yxgCms.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,6 +26,9 @@ public class Course {
 	@GeneratedValue
 	private int id;
 	
+
+	private String uuid;
+	
 	@Column(nullable = false,columnDefinition="varchar(64) default '' comment '课程名称'")
 	private String name;
 	
@@ -47,7 +51,7 @@ public class Course {
 //	@NotFound(action = NotFoundAction.IGNORE)
 //	private List<Classification> classfications;
 	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<ClassificationCourseMapping> classificationCourseMappings;
+	private Set<ClassificationCourseMapping> classificationCourseMappings;
 	
 	@Column(nullable = false,columnDefinition="datetime comment '创建时间'")
 	private Date createtime = new Date();
@@ -149,12 +153,21 @@ public class Course {
 		this.movies = movies;
 	}
 
-	public List<ClassificationCourseMapping> getClassificationCourseMappings() {
+	
+
+	public Set<ClassificationCourseMapping> getClassificationCourseMappings() {
 		return classificationCourseMappings;
 	}
 
-	public void setClassificationCourseMappings(List<ClassificationCourseMapping> classificationCourseMappings) {
+	public void setClassificationCourseMappings(Set<ClassificationCourseMapping> classificationCourseMappings) {
 		this.classificationCourseMappings = classificationCourseMappings;
 	}
 
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 }
