@@ -83,15 +83,15 @@ public class PreCourseController {
 	
 	
 
-/**
-* @author :zy
-* @Title: listPage 
-* @Description: TODO
-* @param @param model
-* @param @return     
-* @return String     
-* @throws
- */
+	/**
+	* @author :zy
+	* @Title: listPage 
+	* @Description: TODO
+	* @param @param model
+	* @param @return     
+	* @return String     
+	* @throws
+	 */
 	@RequestMapping("listPage")
 	public String listPage(ModelMap model) {
 		return "site.yxgCms.course.list";

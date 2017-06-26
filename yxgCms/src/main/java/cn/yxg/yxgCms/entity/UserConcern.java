@@ -12,10 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @Table(name = "yxg_user_concern")
+@JsonIgnoreProperties({"user","concernedUser"})
 public class UserConcern {
 	@Id
 	@GeneratedValue
@@ -31,6 +35,41 @@ public class UserConcern {
 	@ManyToOne
 	@JoinColumn(nullable = false,name="concerned_user")
 	private User concernedUser;
+	
+	@Transient
+	private String creator;
+	
+	@Transient
+	private String userName;
+	
+	@Transient
+	private String userPoster;
+	
+	
+
+	public String getCreator() {
+		return creator;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = user!=null?user.getNickname():null;
+	}
+
+	public String getUserName() {
+		return concernedUser!=null?concernedUser.getNickname():null;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserPoster() {
+		return null;
+	}
+
+	public void setUserPoster(String userPoster) {
+		this.userPoster = userPoster;
+	}
 
 	public int getId() {
 		return id;
