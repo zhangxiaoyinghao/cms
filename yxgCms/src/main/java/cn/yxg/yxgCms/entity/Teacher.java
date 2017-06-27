@@ -40,6 +40,12 @@ public class Teacher {
 	@Column(nullable = true,columnDefinition="text comment '教师海报'")
 	private String poster;
 	
+	@Column(nullable = true,name="audit_status",columnDefinition="bit comment '0:未审核通过 1：审核通过'")
+	private boolean auditStatus;
+	
+	@Column(nullable = true,name="enable",columnDefinition="默认为1，1为启用，0为禁用")
+	private boolean enable;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false,name = "user")
 	private User user;
@@ -131,5 +137,30 @@ public class Teacher {
 	public void setSource(int source) {
 		this.source = source;
 	}
+
+	public boolean isAuditStatus() {
+		return auditStatus;
+	}
+
+	public void setAuditStatus(boolean auditStatus) {
+		this.auditStatus = auditStatus;
+	}
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public List<Homework> getHomeworks() {
+		return homeworks;
+	}
+
+	public void setHomeworks(List<Homework> homeworks) {
+		this.homeworks = homeworks;
+	}
+	
 
 }
