@@ -9,6 +9,7 @@ import java.util.Properties;
 import javax.annotation.Resource;
 
 import cn.yxg.commons.util.json.JsonConverter;
+import cn.yxg.commons.webdev.vo.Page;
 import cn.yxg.yxgCms.dao.ClassificationCourseMappingDao;
 import cn.yxg.yxgCms.dao.ClassificationDao;
 import cn.yxg.yxgCms.dao.CourseCollectionDao;
@@ -38,12 +39,14 @@ import cn.yxg.yxgCms.entity.CourseComment;
 import cn.yxg.yxgCms.entity.CourseOrder;
 import cn.yxg.yxgCms.entity.CourseRecommend;
 import cn.yxg.yxgCms.entity.Movie;
+import cn.yxg.yxgCms.entity.PreCourse;
 import cn.yxg.yxgCms.entity.StudentWork;
 import cn.yxg.yxgCms.entity.Teacher;
 import cn.yxg.yxgCms.entity.UserConcern;
 
 import cn.yxg.yxgCms.entity.User;
 import cn.yxg.yxgCms.entity.UserHomepage;
+import cn.yxg.yxgCms.query.CourseQuery;
 import cn.yxg.yxgCms.service.CourseService;
 import cn.yxg.yxgCms.service.HomepageService;
 import cn.yxg.yxgCms.service.TokenService;
@@ -360,6 +363,13 @@ public class CourseServiceImpl implements CourseService{
 			return courses.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public List<Course> execList(CourseQuery cq, Page page) {
+		List<Course> courses = courseDao.list(cq, page);
+		page.setRecordCount(courseDao.count(cq));
+		return courses;
 	}
 
 

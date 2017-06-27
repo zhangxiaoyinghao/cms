@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -25,6 +28,7 @@ public class UserConcern {
 	@GeneratedValue
 	private int id;
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	@Column(nullable = false,columnDefinition="datetime comment '创建时间'")
 	private Date createtime = new Date();
 	
@@ -48,11 +52,11 @@ public class UserConcern {
 	
 
 	public String getCreator() {
-		return creator;
+		return user!=null?user.getNickname():null;
 	}
 
 	public void setCreator(String creator) {
-		this.creator = user!=null?user.getNickname():null;
+		this.creator = creator;
 	}
 
 	public String getUserName() {

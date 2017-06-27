@@ -107,7 +107,7 @@ public class ADController {
 	}
 	/**
 	 * 
-	 	视频视频查询
+	 	广告位查询
 	 * 
 	 * @param cq
 	 * @return

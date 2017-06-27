@@ -14,13 +14,16 @@ import java.util.Date;
 import java.util.List;
 
 import cn.yxg.commons.dao.hibernate.AdvancedHibernateDao;
+import cn.yxg.commons.webdev.vo.Page;
 import cn.yxg.yxgCms.dto.CourseFilterInputDto;
 import cn.yxg.yxgCms.entity.Classification;
 import cn.yxg.yxgCms.entity.ClassificationCourseMapping;
 import cn.yxg.yxgCms.entity.Course;
 import cn.yxg.yxgCms.entity.CourseRecommend;
+import cn.yxg.yxgCms.entity.PreCourse;
 import cn.yxg.yxgCms.entity.Token;
 import cn.yxg.yxgCms.entity.User;
+import cn.yxg.yxgCms.query.CourseQuery;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -41,7 +44,56 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CourseDao extends AdvancedHibernateDao<Course> {
 
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param query
+	 * @param page
+	 * @return
+	 */
+	public List<Course> list(CourseQuery query, Page page) {
+		// TODO Auto-generated method stub.
+		Criteria criteria = this.getCurrentSession().createCriteria(Course.class,
+				"course");
+		createQueryCriteria(query, criteria);
+		criteria.setFirstResult(page.getIndex() * page.getSize());
+		criteria.setMaxResults(page.getSize());
+		return criteria.list();
+	}
+
+
+	/**
+	 * 
+	 * 　获取查询结果条数
+	 * 
+	 * @param query
+	 * @return
+	 */
+	public long count(CourseQuery query) {
+		Criteria criteria = this.getCurrentSession().createCriteria(Course.class,
+				"course");
+		createQueryCriteria(query, criteria);
+		return Long.parseLong(criteria.setProjection(Projections.rowCount())
+				.uniqueResult().toString());
+	}
 	
+	/**
+	 * 
+	 * 创建查询条件
+	 * 
+	 * @param query
+	 * @param criteria
+	 */
+	private void createQueryCriteria(CourseQuery query, Criteria criteria) {
+		if(StringUtils.isNotBlank(query.getName())){
+			criteria.add(Restrictions.like("course.name", "%"+query.getName()+"%"));
+		}
+		if(query.getStatus()!=null){
+			criteria.add(Restrictions.eq("course.status", query.getStatus()));
+		}
+	}
+
 	
 	public List<Course> getCoursesByCategory(Classification root) {
 		Criteria criteria = this.getCurrentSession().createCriteria(Course.class).createAlias("classificationCourseMappings", "ccm");

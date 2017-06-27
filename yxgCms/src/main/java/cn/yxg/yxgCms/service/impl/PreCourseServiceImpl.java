@@ -89,6 +89,10 @@ public class PreCourseServiceImpl implements PreCourseService{
 	private CourseService courseServiceImpl;
 	
 	
+//	@Resource
+//	private TeacherService teacherServiceImpl;
+	
+	
 	@Resource
 	private CatalogTemplateService catalogTemplateServiceImpl;
 	
@@ -155,7 +159,11 @@ public class PreCourseServiceImpl implements PreCourseService{
 		if(dto.getCatalogTemplateId()!=null){
 			course.setCatalogTemplate(catalogTemplateServiceImpl.get(dto.getCatalogTemplateId()));
 		}
-		
+		List<Teacher> teachers = new ArrayList<>();
+		for (Integer id : dto.getTeachers()) {
+//			teachers.add(teacherServiceImpl.get(id));
+		}
+		course.setTeachers(teachers);
 		course.setUser((User)request.getAttribute("userInfo"));
 		course.setStatus(0);
 		this.add(course);
@@ -173,6 +181,7 @@ public class PreCourseServiceImpl implements PreCourseService{
 		if(dto.getExpiryDate()!=null){
 			course.setExpiryDay(dto.getExpiryDate());
 		}
+		//
 		if(dto.getMovies()!=null){
 			for(PreMovie movie : course.getMovies()){
 				movie.setCourse(null);

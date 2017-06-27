@@ -33,6 +33,7 @@ import cn.yxg.yxgCms.dto.CourseFilterInputDto;
 import cn.yxg.yxgCms.dto.CourseHomepageDto;
 import cn.yxg.yxgCms.dto.CourseListDto;
 import cn.yxg.yxgCms.dto.PreCourseDto;
+import cn.yxg.yxgCms.entity.Course;
 import cn.yxg.yxgCms.entity.PreCourse;
 import cn.yxg.yxgCms.entity.User;
 import cn.yxg.yxgCms.enumeration.RestResponseCode;
@@ -110,6 +111,39 @@ public class PreCourseController {
 		return "site.yxgCms.course.info";
 	}
 	
+	/**
+	 * 
+	 	发布课程查询
+	 * 
+	 * @param cq
+	 * @return
+	 */
+	@RequestMapping(value = "published", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse findPublishedContents(CourseQuery cq) {
+		logger.info("查询发布后课程参数：【" + JsonConverter.format(cq) + "】");
+		RestResponse restResponse = new RestResponse();
+		try {
+			Page page = new Page();
+			page.setIndex(cq.getPage() == null ? 0 : cq.getPage());
+			if(cq.getPageSize()!=null){
+				page.setSize(cq.getPageSize());
+			}
+			List<Course> course = courseServiceImpl.execList(cq, page);
+			// TODO
+			restResponse.setStatusCode(ResponseStatusCode.OK);
+			restResponse.setMessage("查询发布后课程成功！");
+			restResponse.getBody().put("course", course);
+			restResponse.getBody().put("page", page);
+			restResponse.getBody().put("query", cq);
+		} catch (Exception e) {
+			e.printStackTrace();
+			restResponse
+			.setStatusCode(ResponseStatusCode.INTERNAL_SERVER_ERROR);
+			restResponse.setMessage("查询课程异常！");
+		}
+		return restResponse;
+	}
 	/**
 	 * 
 	 	视频视频查询

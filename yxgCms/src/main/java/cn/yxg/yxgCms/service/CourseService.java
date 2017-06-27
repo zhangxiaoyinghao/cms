@@ -2,6 +2,7 @@ package cn.yxg.yxgCms.service;
 
 import java.util.List;
 
+import cn.yxg.commons.webdev.vo.Page;
 import cn.yxg.yxgCms.dto.CategoryPageDto;
 import cn.yxg.yxgCms.dto.CourseCommentListDto;
 import cn.yxg.yxgCms.dto.CourseDetailDto;
@@ -16,6 +17,7 @@ import cn.yxg.yxgCms.dto.WechatLoginDto;
 import cn.yxg.yxgCms.entity.Course;
 import cn.yxg.yxgCms.entity.Token;
 import cn.yxg.yxgCms.entity.User;
+import cn.yxg.yxgCms.query.CourseQuery;
 
 public interface CourseService {
 
@@ -44,6 +46,8 @@ public interface CourseService {
 	void delete(String uuid);
 
 	Course find(String uuid);
+
+	List<Course> execList(CourseQuery cq, Page page);
 
 
 }

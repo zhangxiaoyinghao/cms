@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "yxg_course_recommend")
-@JsonIgnoreProperties("")
+@JsonIgnoreProperties({"course","user"})
 public class CourseRecommend {
 	@Id
 	@GeneratedValue
@@ -36,7 +36,7 @@ public class CourseRecommend {
 	private int sequence;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(nullable = false,name = "course")
+	@JoinColumn(name = "course")
 	private PreCourse course;
 	
 	@ManyToOne

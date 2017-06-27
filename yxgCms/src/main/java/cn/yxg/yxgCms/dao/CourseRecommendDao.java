@@ -9,18 +9,15 @@
  */
 package cn.yxg.yxgCms.dao;
 
-import java.util.Date;
 import java.util.List;
-
-import cn.yxg.commons.dao.hibernate.AdvancedHibernateDao;
-import cn.yxg.yxgCms.entity.Course;
-import cn.yxg.yxgCms.entity.CourseRecommend;
-import cn.yxg.yxgCms.entity.Token;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+
+import cn.yxg.commons.dao.hibernate.AdvancedHibernateDao;
+import cn.yxg.yxgCms.entity.CourseRecommend;
 
 /**
  * @author Archetype Generate
@@ -37,6 +34,5 @@ public class CourseRecommendDao extends AdvancedHibernateDao<CourseRecommend> {
 		return criteria.list();
 	}
 
-	
 	
 }

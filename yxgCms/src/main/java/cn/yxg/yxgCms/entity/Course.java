@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "yxg_course")
 public class Course {
@@ -53,9 +55,11 @@ public class Course {
 	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Set<ClassificationCourseMapping> classificationCourseMappings;
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	@Column(nullable = false,columnDefinition="datetime comment '创建时间'")
 	private Date createtime = new Date();
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	@Column(nullable = false,columnDefinition="timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
 	private Date updatetime;
 	

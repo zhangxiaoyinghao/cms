@@ -41,7 +41,8 @@ public class ADRecommendServiceImpl implements ADRecommendService{
 	@Override
 	public List<CourseRecommend> list() {
 		// TODO Auto-generated method stub
-		return dao.list();
+		String hql = "from CourseRecommend order by place,sequence";
+		return dao.findByHQL(hql, 0, 0);
 	}
 	
 	@Override

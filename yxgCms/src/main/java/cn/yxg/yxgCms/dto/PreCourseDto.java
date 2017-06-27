@@ -30,6 +30,9 @@ public class PreCourseDto {
 	@Length(max=5000,message="编目不合法")
 	private String catalog;
 	
+	@NotEmpty(message="老师不能为空")
+	private List<Integer> teachers;
+	
 	private Integer catalogTemplateId;
 	
 	@NotEmpty(message="分类不能为空")
@@ -131,5 +134,12 @@ public class PreCourseDto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
+	public List<Integer> getTeachers() {
+		return teachers;
+	}
+
+	public void setTeachers(List<Integer> teachers) {
+		this.teachers = teachers;
+	}
 }
