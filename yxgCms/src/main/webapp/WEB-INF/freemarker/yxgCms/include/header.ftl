@@ -114,6 +114,11 @@
             <i class="fa fa-sitemap"></i><span>广告位管理</span>
           </a>
         </li>
+        <li class="<#if  requestPath[2] == 'member'>active</#if>">
+          <a  href="/yxgCms/member/listPage">
+            <i class="fa fa-sitemap"></i><span>会员管理</span>
+          </a>
+        </li>
         <li class="<#if  requestPath[2] == 'conf'>active</#if>">
           <a  href="/yxgCms/conf/listPage">
             <i class="fa fa-sitemap"></i><span>系统配置管理</span>
