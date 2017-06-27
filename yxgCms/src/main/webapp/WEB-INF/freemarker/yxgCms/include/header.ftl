@@ -99,7 +99,7 @@
             <i class="fa fa-sitemap"></i><span>老师管理</span>
           </a>
         </li>
-        <li class="<#if  requestPath[2] == 'content'>active</#if>">
+        <li class="<#if  requestPath[2] == 'content' >active</#if>">
           <a  href="/yxgCms/content/listPage">
             <i class="fa fa-sitemap"></i><span>视频管理</span>
           </a>
