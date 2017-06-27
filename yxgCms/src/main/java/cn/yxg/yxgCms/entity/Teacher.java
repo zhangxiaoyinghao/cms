@@ -138,7 +138,7 @@ public class Teacher {
 		this.source = source;
 	}
 
-	public boolean isAuditStatus() {
+	public boolean getAuditStatus() {
 		return auditStatus;
 	}
 
@@ -146,7 +146,7 @@ public class Teacher {
 		this.auditStatus = auditStatus;
 	}
 
-	public boolean isEnable() {
+	public boolean getEnable() {
 		return enable;
 	}
 

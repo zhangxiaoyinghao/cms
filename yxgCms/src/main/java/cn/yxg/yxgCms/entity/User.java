@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -108,6 +108,18 @@ public class User {
 	
 	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
 	private List<Token> tokens;
+	
+	@OneToOne(mappedBy="user")
+	private Teacher teacher;
+	
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 
 	public int getId() {
 		return id;
@@ -341,7 +353,7 @@ public class User {
 		this.tokens = tokens;
 	}
 
-	public boolean isEnable() {
+	public boolean getEnable() {
 		return enable;
 	}
 
