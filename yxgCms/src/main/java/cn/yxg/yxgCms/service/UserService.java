@@ -2,6 +2,7 @@ package cn.yxg.yxgCms.service;
 
 import java.util.List;
 
+import cn.yxg.commons.webdev.vo.Page;
 import cn.yxg.yxgCms.dto.RegistDto;
 import cn.yxg.yxgCms.dto.UserInfoDto;
 import cn.yxg.yxgCms.dto.WechatLoginDto;
@@ -24,6 +25,12 @@ public interface UserService {
 	void deleteToken(User user);
 
 	User get(int i);
+
+	long listCount(String nickname, String username, String wechatId,
+			Integer type);
+
+	List<User> list(String nickname, String username, String wechatId,
+			Integer type, Page page);
 
 
 }

@@ -1,10 +1,13 @@
 package cn.yxg.yxgCms.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
 
+import cn.yxg.commons.webdev.vo.Page;
 import cn.yxg.yxgCms.dao.TokenDao;
 import cn.yxg.yxgCms.dao.UserDao;
 import cn.yxg.yxgCms.dto.RegistDto;
@@ -134,4 +137,36 @@ public class UserServiceImpl implements UserService{
 		return userDao.get(i);
 	}
 
+
+	@Override
+	public long listCount(String nickname, String username, String wechatId,
+			Integer type) {
+		return userDao.count(nickname,username,wechatId,type);
+	}
+
+
+	@Override
+	public List<User> list(String nickname, String username, String wechatId,
+			Integer type, Page page) {
+		return userDao.list(nickname,username,wechatId,type,page);
+	}
+	
+	/**
+	 * user 转 map
+	 * @return
+	 */
+	private Map<String,Object> userToMap(User user){
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(null != user){
+			map.put("id", user.getId());
+			map.put("userId", user.getId());
+			if(user.getType()==1){
+				
+			}
+			map.put("nickName",user.getNickname());
+			map.put("avatar", user.getAvatar());
+			map.put("content",user.getIntroduce());
+		}
+		return map ;
+	}
 }

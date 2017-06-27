@@ -188,31 +188,6 @@ public class PreCourseController {
 		}
 		return restResponse;
 	}
-	/**
-	 * 
-	 	视频视频查询
-	 * 
-	 * @param cq
-	 * @return
-	 */
-	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public RestResponse findContents(@PathVariable int id) {
-		logger.info("删除课程参数：【" + id + "】");
-		RestResponse restResponse = new RestResponse();
-		try {
-			preCourseServiceImpl.delete(id);
-			// TODO
-			restResponse.setStatusCode(ResponseStatusCode.OK);
-			restResponse.setMessage("删除课程成功！");
-		} catch (Exception e) {
-			e.printStackTrace();
-			restResponse
-			.setStatusCode(ResponseStatusCode.INTERNAL_SERVER_ERROR);
-			restResponse.setMessage("删除课程异常！");
-		}
-		return restResponse;
-	}
 	
 	/**
 	 * 
