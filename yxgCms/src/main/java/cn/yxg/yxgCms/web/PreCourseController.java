@@ -221,12 +221,12 @@ public class PreCourseController {
 		try {
 			PreCourse course = preCourseServiceImpl.get(id);
 			if(checkCourseStatus(course,action)){
-				course.setStatus(action);
 				if(action==1){//销售
 					preCourseServiceImpl.execDeploy(course);
 				}else if(action==2){//停售
 					preCourseServiceImpl.execStop(course);
 				}
+				course.setStatus(action);
 				preCourseServiceImpl.update(course);
 			}else{
 				logger.error("check course status ["+course.getStatus()+" to "+action+"] failed!");

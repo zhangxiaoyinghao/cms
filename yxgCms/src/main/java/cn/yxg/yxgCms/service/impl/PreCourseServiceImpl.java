@@ -271,14 +271,77 @@ public class PreCourseServiceImpl implements PreCourseService{
 	@Override
 	public void execDeploy(PreCourse preCourse) {
 		// TODO Auto-generated method stub
-		courseServiceImpl.delete(preCourse.getUuid());
-		Course course = cloneCourse(preCourse);
-		Set<ClassificationCourseMapping> ccms = cloneCCM(preCourse,course);
-		List<Movie> movies = cloneMovie(preCourse,course);
-		course.setClassificationCourseMappings(ccms);
-		course.setMovies(movies);
-		courseServiceImpl.save(course);
-		
+		if(preCourse.getStatus()==3){//修改待销售
+			Course course = courseServiceImpl.find(preCourse.getUuid());
+			updateCourse(preCourse,course);
+//			updateClassificationCourseMapping(preCourse,course);
+//			updateMovies(preCourse,course);
+//			course.getMovies().clear();
+//			List<Movie> movies = cloneMovie(preCourse,course);
+//			course.getMovies().addAll(movies);
+			course.getMovies().clear();
+			course.getMovies().addAll(cloneMovie(preCourse,course));
+			course.getClassificationCourseMappings().clear();
+			course.getClassificationCourseMappings().addAll(cloneCCM(preCourse,course));
+			courseServiceImpl.update(course);
+		}else{
+			courseServiceImpl.delete(preCourse.getUuid());
+			Course course = cloneCourse(preCourse);
+			Set<ClassificationCourseMapping> ccms = cloneCCM(preCourse,course);
+			List<Movie> movies = cloneMovie(preCourse,course);
+			course.setClassificationCourseMappings(ccms);
+			course.setMovies(movies);
+			courseServiceImpl.save(course);
+		}
+	}
+
+	
+
+	
+
+	private void updateClassificationCourseMapping(PreCourse preCourse, Course course) {
+		// TODO Auto-generated method stub
+		Set<ClassificationPreCourseMapping> preMappings = preCourse.getClassificationPreCourseMappings();
+		Set<ClassificationCourseMapping> mappings = course.getClassificationCourseMappings();
+		for (ClassificationPreCourseMapping preMps : preMappings) {
+			int cfcId = preMps.getClassification().getId();
+			boolean exist = false;
+			for (ClassificationCourseMapping mps : mappings) {
+				if(mps.getClassification().getId()==cfcId){
+					exist = true;
+					break;
+				}
+			}
+			if(!exist){
+				ClassificationCourseMapping ccm = new ClassificationCourseMapping();
+				ccm.setClassification(preMps.getClassification());
+				ccm.setCourse(course);
+				ccm.setRoot(preMps.getRoot());
+				course.getClassificationCourseMappings().add(ccm);
+			}
+		}
+		for (ClassificationCourseMapping mps : mappings) {
+			int cfcId = mps.getClassification().getId();
+			boolean exist = false;
+			for (ClassificationPreCourseMapping preMps : preMappings) {
+				if(cfcId==preMps.getClassification().getId()){
+					exist = true;
+					break;
+				}
+			}
+			if(!exist){
+				course.getClassificationCourseMappings().remove(mps);
+			}
+		}
+	}
+
+	private void updateCourse(PreCourse preCourse, Course course) {
+		// TODO Auto-generated method stub
+		course.setDescription(preCourse.getDescription());
+		course.setExpiryDay(preCourse.getExpiryDay());
+		course.setName(preCourse.getName());
+		course.setPoster(preCourse.getPoster());
+		course.setPrice(preCourse.getPrice());
 	}
 
 	private List<Movie> cloneMovie(PreCourse preCourse,Course course) {

@@ -48,17 +48,10 @@ public interface CourseService {
 	Course find(String uuid);
 
 	List<Course> execList(CourseQuery cq, Page page);
-
-	/** 
-	* @author :zy
-	* @Title: get 
-	* @Description: TODO
-	* @param @param courseId
-	* @param @return     
-	* @return Course     
-	* @throws 
-	*/
+	
 	Course get(int courseId);
+
+	void update(Course course);
 
 
 }

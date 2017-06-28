@@ -378,6 +378,12 @@ public class CourseServiceImpl implements CourseService{
 		return courseDao.get(courseId);
 	}
 
+	@Override
+	public void update(Course course) {
+		// TODO Auto-generated method stub
+		courseDao.update(course);
+	}
+
 
 
 }
