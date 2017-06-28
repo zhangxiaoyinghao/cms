@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 
 import cn.yxg.yxgCms.dao.CourseRecommendDao;
 import cn.yxg.yxgCms.dao.UserConcernDao;
+import cn.yxg.yxgCms.entity.Course;
 import cn.yxg.yxgCms.entity.CourseRecommend;
 import cn.yxg.yxgCms.entity.PreCourse;
 import cn.yxg.yxgCms.entity.User;
 import cn.yxg.yxgCms.entity.UserConcern;
 import cn.yxg.yxgCms.service.ADRecommendService;
+import cn.yxg.yxgCms.service.CourseService;
 import cn.yxg.yxgCms.service.PreCourseService;
 import cn.yxg.yxgCms.service.UserService;
 
@@ -33,6 +35,9 @@ public class ADRecommendServiceImpl implements ADRecommendService{
 	
 	@Resource
 	private UserService userServiceImpl;
+	
+	@Resource
+	private CourseService courseServiceImpl;
 	
 
 	@Autowired  
@@ -78,7 +83,7 @@ public class ADRecommendServiceImpl implements ADRecommendService{
 	public void update(int id, int courseId) {
 		// TODO Auto-generated method stub
 		CourseRecommend cr = dao.get(id);
-		PreCourse course = preCourseServiceImpl.get(courseId);
+		Course course = courseServiceImpl.get(courseId);
 		cr.setCourse(course);
 		cr.setUser((User)request.getAttribute("userInfo"));
 		dao.update(cr);

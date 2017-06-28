@@ -35,9 +35,10 @@ public class CourseRecommend {
 	@Column(nullable = false,columnDefinition="smallint comment '顺序'")
 	private int sequence;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "course")
-	private PreCourse course;
+	@NotFound(action = NotFoundAction.IGNORE)
+	private Course course;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
@@ -90,11 +91,20 @@ public class CourseRecommend {
 		this.sequence = sequence;
 	}
 
-	public PreCourse getCourse() {
-		return course;
+
+	/**
+	 * Returns the value of the field called 'course'.
+	 * @return Returns the course.
+	 */
+	public Course getCourse() {
+		return this.course;
 	}
 
-	public void setCourse(PreCourse course) {
+	/**
+	 * Sets the field called 'course' to the given value.
+	 * @param course The course to set.
+	 */
+	public void setCourse(Course course) {
 		this.course = course;
 	}
 

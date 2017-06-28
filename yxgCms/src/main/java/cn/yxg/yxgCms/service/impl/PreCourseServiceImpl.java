@@ -181,7 +181,14 @@ public class PreCourseServiceImpl implements PreCourseService{
 		if(dto.getExpiryDate()!=null){
 			course.setExpiryDay(dto.getExpiryDate());
 		}
-		//
+		if(dto.getTeachers()!=null){
+			course.getTeachers().clear();
+			List<Teacher> teachers = new ArrayList<>();
+			for (Integer tId : dto.getTeachers()) {
+//				teachers.add(teacherServiceImpl.get(tId));
+			}
+			course.getTeachers().addAll(teachers);
+		}
 		if(dto.getMovies()!=null){
 			for(PreMovie movie : course.getMovies()){
 				movie.setCourse(null);
@@ -322,6 +329,7 @@ public class PreCourseServiceImpl implements PreCourseService{
 	public void execStop(PreCourse preCourse) {
 		// TODO Auto-generated method stub
 		courseServiceImpl.delete(preCourse.getUuid());
+		
 	}
 
 	

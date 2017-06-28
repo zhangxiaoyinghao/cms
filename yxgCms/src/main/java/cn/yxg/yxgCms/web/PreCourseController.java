@@ -146,7 +146,7 @@ public class PreCourseController {
 	}
 	/**
 	 * 
-	 	视频视频查询
+	 	课程查询
 	 * 
 	 * @param cq
 	 * @return

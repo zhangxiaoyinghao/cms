@@ -49,5 +49,16 @@ public interface CourseService {
 
 	List<Course> execList(CourseQuery cq, Page page);
 
+	/** 
+	* @author :zy
+	* @Title: get 
+	* @Description: TODO
+	* @param @param courseId
+	* @param @return     
+	* @return Course     
+	* @throws 
+	*/
+	Course get(int courseId);
+
 
 }

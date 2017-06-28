@@ -66,6 +66,9 @@ public class Course {
 	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Movie> movies;
 	
+	@OneToMany(mappedBy = "course",fetch = FetchType.LAZY)
+	private List<CourseRecommend> courseRecommends;
+	
 //	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 //	@JoinTable(name = "yxg_teacher_course_mapping",
 //			joinColumns = @JoinColumn(name = "course"),
@@ -173,5 +176,21 @@ public class Course {
 
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
+	}
+
+	/**
+	 * Returns the value of the field called 'courseRecommends'.
+	 * @return Returns the courseRecommends.
+	 */
+	public List<CourseRecommend> getCourseRecommends() {
+		return this.courseRecommends;
+	}
+
+	/**
+	 * Sets the field called 'courseRecommends' to the given value.
+	 * @param courseRecommends The courseRecommends to set.
+	 */
+	public void setCourseRecommends(List<CourseRecommend> courseRecommends) {
+		this.courseRecommends = courseRecommends;
 	}
 }

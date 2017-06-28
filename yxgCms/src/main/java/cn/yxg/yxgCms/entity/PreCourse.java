@@ -90,7 +90,7 @@ public class PreCourse {
 	
 	
 	
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "yxg_teacher_course_mapping",
 			joinColumns = @JoinColumn(name = "course"),
 			inverseJoinColumns = @JoinColumn(name = "teacher"))
