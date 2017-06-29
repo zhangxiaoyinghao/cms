@@ -40,6 +40,12 @@ public class Teacher {
 	@Column(nullable = true,columnDefinition="text comment '教师海报'")
 	private String poster;
 	
+	@Column(nullable = true,name="audit_status",columnDefinition="bit comment '0:未审核通过 1：审核通过'")
+	private boolean auditStatus;
+	
+	@Column(nullable = true,name="enable",columnDefinition="默认为1，1为启用，0为禁用")
+	private boolean enable;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false,name = "user")
 	private User user;
@@ -49,6 +55,9 @@ public class Teacher {
 	
 	@Column(nullable = false,columnDefinition="smallint default 0 comment '来源：0为官方老师，1为用户申请的老师'")
 	private int source;
+	
+	@Column(nullable = false, name="classification",columnDefinition="smallint comment '1代表美术，2代表音乐，3代表舞蹈'")
+	private Integer classification;
 	
 	@OneToMany(mappedBy = "creator",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Homework> homeworks;
@@ -131,5 +140,39 @@ public class Teacher {
 	public void setSource(int source) {
 		this.source = source;
 	}
+
+	public boolean getAuditStatus() {
+		return auditStatus;
+	}
+
+	public void setAuditStatus(boolean auditStatus) {
+		this.auditStatus = auditStatus;
+	}
+
+	public boolean getEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public List<Homework> getHomeworks() {
+		return homeworks;
+	}
+
+	public void setHomeworks(List<Homework> homeworks) {
+		this.homeworks = homeworks;
+	}
+
+	public Integer getClassification() {
+		return classification;
+	}
+
+	public void setClassification(Integer classification) {
+		this.classification = classification;
+	}
+
+	
 
 }

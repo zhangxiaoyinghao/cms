@@ -99,7 +99,7 @@
             <i class="fa fa-sitemap"></i><span>老师管理</span>
           </a>
         </li>
-        <li class="<#if  requestPath[2] == 'content'>active</#if>">
+        <li class="<#if  requestPath[2] == 'content' >active</#if>">
           <a  href="/yxgCms/content/listPage">
             <i class="fa fa-sitemap"></i><span>视频管理</span>
           </a>
@@ -112,6 +112,11 @@
         <li class="<#if  requestPath[2] == 'ad'>active</#if>">
           <a  href="/yxgCms/ad/listPage">
             <i class="fa fa-sitemap"></i><span>广告位管理</span>
+          </a>
+        </li>
+        <li class="<#if  requestPath[2] == 'member'>active</#if>">
+          <a  href="/yxgCms/member/listPage">
+            <i class="fa fa-sitemap"></i><span>会员管理</span>
           </a>
         </li>
         <li class="<#if  requestPath[2] == 'conf'>active</#if>">

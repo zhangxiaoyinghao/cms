@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -57,6 +57,9 @@ public class User {
 	
 	@Column(nullable = false,columnDefinition="smallint default 0 comment '用户类型，0为普通用户，1为老师'")
 	private int type;
+	
+	@Column(name="enable" ,columnDefinition="bit comment '1：已启用 0:禁用'")
+	private boolean enable;
 	
 	@Column(nullable = false,columnDefinition="datetime comment '创建时间'")
 	private Date createtime = new Date();
@@ -105,6 +108,18 @@ public class User {
 	
 	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
 	private List<Token> tokens;
+	
+	@OneToOne(mappedBy="user")
+	private Teacher teacher;
+	
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 
 	public int getId() {
 		return id;
@@ -337,6 +352,15 @@ public class User {
 	public void setTokens(List<Token> tokens) {
 		this.tokens = tokens;
 	}
+
+	public boolean getEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
 	
+
 	
 }

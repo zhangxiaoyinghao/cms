@@ -1,7 +1,9 @@
 package cn.yxg.yxgCms.service;
 
 import java.util.List;
+import java.util.Map;
 
+import cn.yxg.commons.webdev.vo.Page;
 import cn.yxg.yxgCms.dto.RegistDto;
 import cn.yxg.yxgCms.dto.UserInfoDto;
 import cn.yxg.yxgCms.dto.WechatLoginDto;
@@ -25,5 +27,13 @@ public interface UserService {
 
 	User get(int i);
 
+	long listCount(String nickname, String username, String wechatId,
+			Integer type);
 
-}
+	List<Map<String,Object>> list(String nickname, String username, String wechatId,
+			Integer type, Page page);
+
+	public  Map<String,Object> userToMap(User user);
+
+	void update(User user);
+}	

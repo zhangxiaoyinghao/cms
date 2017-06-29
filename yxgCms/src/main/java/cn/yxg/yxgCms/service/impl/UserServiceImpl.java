@@ -1,10 +1,14 @@
 package cn.yxg.yxgCms.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
 
+import cn.yxg.commons.webdev.vo.Page;
 import cn.yxg.yxgCms.dao.TokenDao;
 import cn.yxg.yxgCms.dao.UserDao;
 import cn.yxg.yxgCms.dto.RegistDto;
@@ -134,4 +138,52 @@ public class UserServiceImpl implements UserService{
 		return userDao.get(i);
 	}
 
+
+	@Override
+	public long listCount(String nickname, String username, String wechatId,
+			Integer type) {
+		return userDao.count(nickname,username,wechatId,type);
+	}
+
+
+	@Override
+	public List<Map<String,Object>> list(String nickname, String username, String wechatId,
+			Integer type, Page page) {
+		List<User> list =  userDao.list(nickname,username,wechatId,type,page);
+		List<Map<String,Object>> maps = new ArrayList<Map<String,Object>>();
+		if(null!= list&& list.size()>0){
+			for(User user :list){
+				maps.add(userToMap(user));
+			}
+		}
+		return maps;
+	}
+	
+	/**
+	 * user 转 map
+	 * @return
+	 */
+	@Override
+	public  Map<String,Object> userToMap(User user){
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(null != user){
+			map.put("id", user.getId());
+			map.put("username", user.getUsername());
+			if(user.getType()==1&& null!= user.getTeacher()){
+				map.put("teacherName", user.getTeacher().getName());
+			}
+			map.put("nickName",user.getNickname());
+			map.put("updatetime", user.getUpdatetime());
+			map.put("createtime",user.getCreatetime());
+			map.put("type", user.getType());
+			map.put("enable", user.getEnable());
+		}
+		return map ;
+	}
+
+
+	@Override
+	public void update(User user) {
+		userDao.update(user);
+	}
 }
