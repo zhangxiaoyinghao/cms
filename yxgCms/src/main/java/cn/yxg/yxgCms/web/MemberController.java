@@ -52,6 +52,7 @@ public class MemberController {
 			@RequestParam(value="index") int index,
 			@RequestParam(value="pageSize",defaultValue="10") int pageSize) {
 		RestResponse response = new RestResponse();
+		
 		Page page = new Page();
 		page.setIndex(index);
 		page.setSize(pageSize);
