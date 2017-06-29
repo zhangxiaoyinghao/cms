@@ -49,6 +49,22 @@ public class TeacherDao extends AdvancedHibernateDao<Teacher> {
 		criteria.add(Restrictions.eq("source", 0));
 		return criteria.list().size()>0?true:false;
 	}
+
+	public long listCount(String name, Integer classification,
+			Boolean auditStatus) {
+		Criteria criteria = this.getCurrentSession().createCriteria(Teacher.class);
+		if(StringUtils.isNotEmpty(name)){
+			criteria.add(Restrictions.eq("name", name));
+		}
+		if(null!= classification){
+			criteria.add(Restrictions.like("classification", classification));
+		}
+		if(null!= auditStatus){
+			criteria.add(Restrictions.eq("auditStatus", auditStatus));
+		}
+		
+		return 0;
+	}
 	
 	
 	

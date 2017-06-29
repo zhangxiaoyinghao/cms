@@ -56,6 +56,9 @@ public class Teacher {
 	@Column(nullable = false,columnDefinition="smallint default 0 comment '来源：0为官方老师，1为用户申请的老师'")
 	private int source;
 	
+	@Column(nullable = false, name="classification",columnDefinition="smallint comment '1代表美术，2代表音乐，3代表舞蹈'")
+	private Integer classification;
+	
 	@OneToMany(mappedBy = "creator",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Homework> homeworks;
 	
@@ -161,6 +164,15 @@ public class Teacher {
 	public void setHomeworks(List<Homework> homeworks) {
 		this.homeworks = homeworks;
 	}
+
+	public Integer getClassification() {
+		return classification;
+	}
+
+	public void setClassification(Integer classification) {
+		this.classification = classification;
+	}
+
 	
 
 }

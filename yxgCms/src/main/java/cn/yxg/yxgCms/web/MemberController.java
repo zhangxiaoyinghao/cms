@@ -34,17 +34,6 @@ public class MemberController {
 	private UserService userService;
 
 	/**
-	 * 进入列表页
-	 * 
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("listPage")
-	public String listPage(Model model) {
-		return "site.yxgCms.member.list";
-	}
-
-	/**
 	 * 获得列表数据
 	 * @param nickname
 	 * @param username
@@ -82,19 +71,18 @@ public class MemberController {
 	 * @param userId
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value = "info/{userId}")
 	public RestResponse userInfo(@PathVariable(value="userId") Integer userId) {
 		RestResponse response = new RestResponse();
-		if(null== userId){
-			response.setMessage("获取用户详情失败！");
+		User user = userService.get(userId);
+		if(user==null){
+			response.setMessage("该用户不存在！");
 			response.setStatusCode(ResponseStatusCode.BAD_REQUEST);
 			return response;
 		}
-		User user = userService.get(userId);
-		response.setMessage("获取列表信息成功！");
-		response.setData(userService.userToMap(user));
+		response.setMessage("获取用户信息成功！");
 		response.setStatusCode(ResponseStatusCode.OK);
+		response.setData(userService.userToMap(user));
 		return response;
 	}
 	
