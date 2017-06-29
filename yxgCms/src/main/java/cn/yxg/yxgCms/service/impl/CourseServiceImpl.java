@@ -9,6 +9,7 @@ import java.util.Properties;
 import javax.annotation.Resource;
 
 import cn.yxg.commons.util.json.JsonConverter;
+import cn.yxg.commons.webdev.vo.Page;
 import cn.yxg.yxgCms.dao.ClassificationCourseMappingDao;
 import cn.yxg.yxgCms.dao.ClassificationDao;
 import cn.yxg.yxgCms.dao.CourseCollectionDao;
@@ -38,12 +39,14 @@ import cn.yxg.yxgCms.entity.CourseComment;
 import cn.yxg.yxgCms.entity.CourseOrder;
 import cn.yxg.yxgCms.entity.CourseRecommend;
 import cn.yxg.yxgCms.entity.Movie;
+import cn.yxg.yxgCms.entity.PreCourse;
 import cn.yxg.yxgCms.entity.StudentWork;
 import cn.yxg.yxgCms.entity.Teacher;
 import cn.yxg.yxgCms.entity.UserConcern;
 
 import cn.yxg.yxgCms.entity.User;
 import cn.yxg.yxgCms.entity.UserHomepage;
+import cn.yxg.yxgCms.query.CourseQuery;
 import cn.yxg.yxgCms.service.CourseService;
 import cn.yxg.yxgCms.service.HomepageService;
 import cn.yxg.yxgCms.service.TokenService;
@@ -303,11 +306,9 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	public void addCourseOrder(User user, int course) {
 		Course courseObj = courseDao.get(course);
-		
 		if(courseOrderDao.hasJoined(user,courseObj)){
 			return;
 		}
-		
 		CourseOrder courseOrder = new CourseOrder();
 		courseOrder.setCourse(courseObj);
 		courseOrder.setOrderCode(CommonUtil.generateUuid());
@@ -340,5 +341,49 @@ public class CourseServiceImpl implements CourseService{
 		courseCollectionDao.save(courseCollection);
 		
 	}
+
+	@Override
+	public void save(Course course) {
+		// TODO Auto-generated method stub
+		courseDao.save(course);
+	}
+
+	@Override
+	public void delete(String uuid) {
+		// TODO Auto-generated method stub
+		Course course = find(uuid);
+		courseDao.delete(course);
+	}
+	@Override
+	public Course find(String uuid) {
+		// TODO Auto-generated method stub
+		String hql = "from Course where uuid=?";
+		List<Course> courses = courseDao.findByHQL(hql, 0, 0, uuid);
+		if(courses!=null&&courses.size()>0){
+			return courses.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public List<Course> execList(CourseQuery cq, Page page) {
+		List<Course> courses = courseDao.list(cq, page);
+		page.setRecordCount(courseDao.count(cq));
+		return courses;
+	}
+
+	@Override
+	public Course get(int courseId) {
+		// TODO Auto-generated method stub.
+		return courseDao.get(courseId);
+	}
+
+	@Override
+	public void update(Course course) {
+		// TODO Auto-generated method stub
+		courseDao.update(course);
+	}
+
+
 
 }

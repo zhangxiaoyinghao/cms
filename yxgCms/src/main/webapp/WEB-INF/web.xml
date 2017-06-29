@@ -34,11 +34,11 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- Add application configuration loader listener. 
+	<!-- Add application configuration loader listener.--> 
 	<listener>
-		<listener-class>cn.videoworks.commons.webdev.listener.ConfigureLoaderListener</listener-class>
+		<listener-class>cn.yxg.yxgCms.listener.ADInitializer</listener-class>
 	</listener>
--->
+
 	<!-- Set the web page encoding. -->
 	<filter>
 		<filter-name>utf8Encoding</filter-name>

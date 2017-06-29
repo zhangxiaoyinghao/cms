@@ -27,4 +27,6 @@ public interface PreCourseService {
 
 	void execDeploy(PreCourse course);
 
+	void execStop(PreCourse course);
+
 }
