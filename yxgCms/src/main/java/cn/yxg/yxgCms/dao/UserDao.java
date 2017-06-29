@@ -51,7 +51,7 @@ public class UserDao extends AdvancedHibernateDao<User>{
 	}
 
 	public long count(String nickname, String username, String wechatId,
-			Integer type) {
+			Integer type,Boolean enable) {
 			Criteria criteria = this.getCurrentSession().createCriteria(User.class);
 			if(!StringUtils.isBlank(nickname)){
 				criteria.add(Restrictions.like("nickname", "%"+nickname+"%"));
@@ -65,11 +65,14 @@ public class UserDao extends AdvancedHibernateDao<User>{
 			if(null!= type){
 				criteria.add(Restrictions.eq("type", type));
 			}
+			if(null!= enable){
+				criteria.add(Restrictions.eq("enable", enable));
+			}
 			return (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 	}
 
 	public List<User> list(String nickname, String username, String wechatId,
-			Integer type, Page page) {
+			Integer type, Page page,Boolean enable) {
 		Criteria criteria = this.getCurrentSession().createCriteria(User.class);
 		if(!StringUtils.isBlank(nickname)){
 			criteria.add(Restrictions.like("nickname", "%"+nickname+"%"));
@@ -82,6 +85,9 @@ public class UserDao extends AdvancedHibernateDao<User>{
 		}
 		if(null!= type){
 			criteria.add(Restrictions.eq("type", type));
+		}
+		if(null!= enable){
+			criteria.add(Restrictions.eq("enable", enable));
 		}
 		if(null==page){
 			page = new Page();

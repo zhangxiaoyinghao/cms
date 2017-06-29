@@ -141,15 +141,15 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public long listCount(String nickname, String username, String wechatId,
-			Integer type) {
-		return userDao.count(nickname,username,wechatId,type);
+			Integer type,Boolean enable) {
+		return userDao.count(nickname,username,wechatId,type,enable);
 	}
 
 
 	@Override
 	public List<Map<String,Object>> list(String nickname, String username, String wechatId,
-			Integer type, Page page) {
-		List<User> list =  userDao.list(nickname,username,wechatId,type,page);
+			Integer type, Page page, Boolean enable) {
+		List<User> list =  userDao.list(nickname,username,wechatId,type,page, enable);
 		List<Map<String,Object>> maps = new ArrayList<Map<String,Object>>();
 		if(null!= list&& list.size()>0){
 			for(User user :list){

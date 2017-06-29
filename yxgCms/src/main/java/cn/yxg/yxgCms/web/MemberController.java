@@ -48,15 +48,16 @@ public class MemberController {
 			@RequestParam(value = "username") String username,
 			@RequestParam(value="wechatId") String wechatId,
 			@RequestParam(value="type") Integer type,
+			@RequestParam(value="enable") Boolean enable,
 			@RequestParam(value="index") int index,
 			@RequestParam(value="pageSize",defaultValue="10") int pageSize) {
 		RestResponse response = new RestResponse();
 		Page page = new Page();
 		page.setIndex(index);
 		page.setSize(pageSize);
-		long count = userService.listCount(nickname,username,wechatId,type);
+		long count = userService.listCount(nickname,username,wechatId,type,enable);
 		page.setRecordCount(count);
-		List<Map<String,Object>> list = userService.list(nickname,username,wechatId,type,page);
+		List<Map<String,Object>> list = userService.list(nickname,username,wechatId,type,page,enable);
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("page", page);
 		map.put("list", list);

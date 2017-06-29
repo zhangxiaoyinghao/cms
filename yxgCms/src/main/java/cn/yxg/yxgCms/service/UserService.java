@@ -28,10 +28,10 @@ public interface UserService {
 	User get(int i);
 
 	long listCount(String nickname, String username, String wechatId,
-			Integer type);
+			Integer type, Boolean enable);
 
 	List<Map<String,Object>> list(String nickname, String username, String wechatId,
-			Integer type, Page page);
+			Integer type, Page page, Boolean enable);
 
 	public  Map<String,Object> userToMap(User user);
 
