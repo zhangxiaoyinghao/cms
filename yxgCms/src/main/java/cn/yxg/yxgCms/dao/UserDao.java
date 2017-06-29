@@ -63,7 +63,7 @@ public class UserDao extends AdvancedHibernateDao<User>{
 				criteria.add(Restrictions.like("wechatId", "%"+wechatId+"%"));
 			}
 			if(null!= type){
-				criteria.add(Restrictions.eq("type", "type"));
+				criteria.add(Restrictions.eq("type", type));
 			}
 			return (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 	}
@@ -81,7 +81,7 @@ public class UserDao extends AdvancedHibernateDao<User>{
 			criteria.add(Restrictions.like("wechatId", "%"+wechatId+"%"));
 		}
 		if(null!= type){
-			criteria.add(Restrictions.eq("type", "type"));
+			criteria.add(Restrictions.eq("type", type));
 		}
 		if(null==page){
 			page = new Page();
