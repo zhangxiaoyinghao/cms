@@ -14,11 +14,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -71,9 +77,11 @@ public class PreCourse {
 	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval=true)
 	private Set<ClassificationPreCourseMapping> classificationPreCourseMappings;
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	@Column(nullable = false,columnDefinition="datetime comment '创建时间'")
 	private Date createtime = new Date();
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	@Column(nullable = false,columnDefinition="timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
 	private Date updatetime;
 	
@@ -82,12 +90,12 @@ public class PreCourse {
 	
 	
 	
-//	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-//	@JoinTable(name = "yxg_teacher_course_mapping",
-//			joinColumns = @JoinColumn(name = "course"),
-//			inverseJoinColumns = @JoinColumn(name = "teacher"))
-//	@NotFound(action = NotFoundAction.IGNORE)
-//	private List<Teacher> teachers;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "yxg_teacher_course_mapping",
+			joinColumns = @JoinColumn(name = "course"),
+			inverseJoinColumns = @JoinColumn(name = "teacher"))
+	@NotFound(action = NotFoundAction.IGNORE)
+	private List<Teacher> teachers;
 	
 //	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 //	private List<CourseCollection> courseCollections;
@@ -238,5 +246,11 @@ public class PreCourse {
 		this.classificationList = classificationList;
 	}
 
-	
+	public List<Teacher> getTeachers() {
+		return teachers;
+	}
+
+	public void setTeachers(List<Teacher> teachers) {
+		this.teachers = teachers;
+	}
 }

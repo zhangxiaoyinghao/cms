@@ -86,7 +86,11 @@ public class PreCourseServiceImpl implements PreCourseService{
 	private ClassificationService classificationServiceImpl;
 	
 	@Resource
-	private PreCourseService preCourseServiceImpl;
+	private CourseService courseServiceImpl;
+	
+	
+//	@Resource
+//	private TeacherService teacherServiceImpl;
 	
 	
 	@Resource
@@ -155,15 +159,19 @@ public class PreCourseServiceImpl implements PreCourseService{
 		if(dto.getCatalogTemplateId()!=null){
 			course.setCatalogTemplate(catalogTemplateServiceImpl.get(dto.getCatalogTemplateId()));
 		}
-		
+		List<Teacher> teachers = new ArrayList<>();
+		for (Integer id : dto.getTeachers()) {
+//			teachers.add(teacherServiceImpl.get(id));
+		}
+		course.setTeachers(teachers);
 		course.setUser((User)request.getAttribute("userInfo"));
 		course.setStatus(0);
-		preCourseServiceImpl.add(course);
+		this.add(course);
 	}
 	@Override
 	public void execUpdate(PreCourseDto dto) {
 		// TODO Auto-generated method stub
-		PreCourse course = preCourseServiceImpl.get(dto.getId());
+		PreCourse course = this.get(dto.getId());
 		if(StringUtils.isNotBlank(dto.getCatalog())){
 			course.setCatalog(dto.getCatalog());
 		}
@@ -172,6 +180,14 @@ public class PreCourseServiceImpl implements PreCourseService{
 		}
 		if(dto.getExpiryDate()!=null){
 			course.setExpiryDay(dto.getExpiryDate());
+		}
+		if(dto.getTeachers()!=null){
+			course.getTeachers().clear();
+			List<Teacher> teachers = new ArrayList<>();
+			for (Integer tId : dto.getTeachers()) {
+//				teachers.add(teacherServiceImpl.get(tId));
+			}
+			course.getTeachers().addAll(teachers);
 		}
 		if(dto.getMovies()!=null){
 			for(PreMovie movie : course.getMovies()){
@@ -224,7 +240,7 @@ public class PreCourseServiceImpl implements PreCourseService{
 		if(course.getStatus()==1||course.getStatus()==2){
 			course.setStatus(3);
 		}
-		preCourseServiceImpl.update(course);
+		this.update(course);
 	}
 
 	@Override
@@ -249,11 +265,133 @@ public class PreCourseServiceImpl implements PreCourseService{
 			movie.setCourse(null);
 		}
 		dao.delete(id);
+		courseServiceImpl.delete(course.getUuid());
 	}
 
 	@Override
-	public void execDeploy(PreCourse course) {
+	public void execDeploy(PreCourse preCourse) {
 		// TODO Auto-generated method stub
+		if(preCourse.getStatus()==3){//修改待销售
+			Course course = courseServiceImpl.find(preCourse.getUuid());
+			updateCourse(preCourse,course);
+//			updateClassificationCourseMapping(preCourse,course);
+//			updateMovies(preCourse,course);
+//			course.getMovies().clear();
+//			List<Movie> movies = cloneMovie(preCourse,course);
+//			course.getMovies().addAll(movies);
+			course.getMovies().clear();
+			course.getMovies().addAll(cloneMovie(preCourse,course));
+			course.getClassificationCourseMappings().clear();
+			course.getClassificationCourseMappings().addAll(cloneCCM(preCourse,course));
+			courseServiceImpl.update(course);
+		}else{
+			courseServiceImpl.delete(preCourse.getUuid());
+			Course course = cloneCourse(preCourse);
+			Set<ClassificationCourseMapping> ccms = cloneCCM(preCourse,course);
+			List<Movie> movies = cloneMovie(preCourse,course);
+			course.setClassificationCourseMappings(ccms);
+			course.setMovies(movies);
+			courseServiceImpl.save(course);
+		}
+	}
+
+	
+
+	
+
+	private void updateClassificationCourseMapping(PreCourse preCourse, Course course) {
+		// TODO Auto-generated method stub
+		Set<ClassificationPreCourseMapping> preMappings = preCourse.getClassificationPreCourseMappings();
+		Set<ClassificationCourseMapping> mappings = course.getClassificationCourseMappings();
+		for (ClassificationPreCourseMapping preMps : preMappings) {
+			int cfcId = preMps.getClassification().getId();
+			boolean exist = false;
+			for (ClassificationCourseMapping mps : mappings) {
+				if(mps.getClassification().getId()==cfcId){
+					exist = true;
+					break;
+				}
+			}
+			if(!exist){
+				ClassificationCourseMapping ccm = new ClassificationCourseMapping();
+				ccm.setClassification(preMps.getClassification());
+				ccm.setCourse(course);
+				ccm.setRoot(preMps.getRoot());
+				course.getClassificationCourseMappings().add(ccm);
+			}
+		}
+		for (ClassificationCourseMapping mps : mappings) {
+			int cfcId = mps.getClassification().getId();
+			boolean exist = false;
+			for (ClassificationPreCourseMapping preMps : preMappings) {
+				if(cfcId==preMps.getClassification().getId()){
+					exist = true;
+					break;
+				}
+			}
+			if(!exist){
+				course.getClassificationCourseMappings().remove(mps);
+			}
+		}
+	}
+
+	private void updateCourse(PreCourse preCourse, Course course) {
+		// TODO Auto-generated method stub
+		course.setDescription(preCourse.getDescription());
+		course.setExpiryDay(preCourse.getExpiryDay());
+		course.setName(preCourse.getName());
+		course.setPoster(preCourse.getPoster());
+		course.setPrice(preCourse.getPrice());
+	}
+
+	private List<Movie> cloneMovie(PreCourse preCourse,Course course) {
+		// TODO Auto-generated method stub
+		List<Movie> movies = new ArrayList<>();
+		for(PreMovie preMovie:preCourse.getMovies()){
+			Movie movie = new Movie();
+			movie.setCourse(course);
+			movie.setCreatetime(preMovie.getCreatetime());
+			movie.setDescription(preMovie.getDescription());
+			movie.setDuration(preMovie.getDuration());
+			movie.setName(preMovie.getName());
+			movie.setSequence(preMovie.getSequence());
+			movie.setUpdatetime(preMovie.getUpdatetime());
+			movie.setUrl(preMovie.getUrl());
+			movies.add(movie);
+		}
+		return movies;
+	}
+
+	private Set<ClassificationCourseMapping> cloneCCM(PreCourse preCourse,Course course) {
+		Set<ClassificationCourseMapping> ccms = new HashSet<>();
+		for(ClassificationPreCourseMapping ccpm : preCourse.getClassificationPreCourseMappings()){
+			ClassificationCourseMapping ccm = new ClassificationCourseMapping();
+			ccm.setClassification(ccpm.getClassification());
+			ccm.setCourse(course);
+			ccm.setRoot(ccpm.getRoot());
+			ccms.add(ccm);
+		}
+		return ccms;
+	}
+
+	private Course cloneCourse(PreCourse course) {
+		// TODO Auto-generated method stub
+		Course newCourse = new Course();
+		newCourse.setCreatetime(course.getCreatetime());
+		newCourse.setDescription(course.getDescription());
+		newCourse.setExpiryDay(course.getExpiryDay());
+		newCourse.setName(course.getName());
+		newCourse.setPoster(course.getPoster());
+		newCourse.setPrice(course.getPrice());
+		newCourse.setUpdatetime(course.getUpdatetime());
+		newCourse.setUuid(course.getUuid());
+		return newCourse;
+	}
+
+	@Override
+	public void execStop(PreCourse preCourse) {
+		// TODO Auto-generated method stub
+		courseServiceImpl.delete(preCourse.getUuid());
 		
 	}
 

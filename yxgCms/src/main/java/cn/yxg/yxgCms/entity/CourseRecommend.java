@@ -9,13 +9,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
 @Entity
 @Table(name = "yxg_course_recommend")
+@JsonIgnoreProperties({"course","user"})
 public class CourseRecommend {
 	@Id
 	@GeneratedValue
@@ -27,9 +35,37 @@ public class CourseRecommend {
 	@Column(nullable = false,columnDefinition="smallint comment '顺序'")
 	private int sequence;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(nullable = false,name = "course")
+	@ManyToOne
+	@JoinColumn(name = "course")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private Course course;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	@NotFound(action = NotFoundAction.IGNORE)
+	private User user;
+	
+	@Transient
+	private String creator;
+	
+	@Transient
+	private String poster;
+	
+	@Transient
+	private String courseName;
+	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
 
 	public int getId() {
 		return id;
@@ -55,13 +91,42 @@ public class CourseRecommend {
 		this.sequence = sequence;
 	}
 
+
+	/**
+	 * Returns the value of the field called 'course'.
+	 * @return Returns the course.
+	 */
 	public Course getCourse() {
-		return course;
+		return this.course;
 	}
 
+	/**
+	 * Sets the field called 'course' to the given value.
+	 * @param course The course to set.
+	 */
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	
-	
+
+	public String getPoster() {
+		return course!=null?course.getPoster():null;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
+	public String getCourseName() {
+		return course!=null?course.getName():null;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public String getCreator() {
+		return user!=null?user.getNickname():null;
+	}
+
+
 }

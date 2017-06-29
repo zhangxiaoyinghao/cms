@@ -2,6 +2,7 @@ package cn.yxg.yxgCms.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,12 +19,17 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "yxg_course")
 public class Course {
 	@Id
 	@GeneratedValue
 	private int id;
+	
+
+	private String uuid;
 	
 	@Column(nullable = false,columnDefinition="varchar(64) default '' comment '课程名称'")
 	private String name;
@@ -47,16 +53,21 @@ public class Course {
 //	@NotFound(action = NotFoundAction.IGNORE)
 //	private List<Classification> classfications;
 	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<ClassificationCourseMapping> classificationCourseMappings;
+	private Set<ClassificationCourseMapping> classificationCourseMappings;
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	@Column(nullable = false,columnDefinition="datetime comment '创建时间'")
 	private Date createtime = new Date();
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	@Column(nullable = false,columnDefinition="timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
 	private Date updatetime;
 	
 	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Movie> movies;
+	
+	@OneToMany(mappedBy = "course",fetch = FetchType.LAZY)
+	private List<CourseRecommend> courseRecommends;
 	
 //	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 //	@JoinTable(name = "yxg_teacher_course_mapping",
@@ -149,12 +160,37 @@ public class Course {
 		this.movies = movies;
 	}
 
-	public List<ClassificationCourseMapping> getClassificationCourseMappings() {
+	
+
+	public Set<ClassificationCourseMapping> getClassificationCourseMappings() {
 		return classificationCourseMappings;
 	}
 
-	public void setClassificationCourseMappings(List<ClassificationCourseMapping> classificationCourseMappings) {
+	public void setClassificationCourseMappings(Set<ClassificationCourseMapping> classificationCourseMappings) {
 		this.classificationCourseMappings = classificationCourseMappings;
 	}
 
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	/**
+	 * Returns the value of the field called 'courseRecommends'.
+	 * @return Returns the courseRecommends.
+	 */
+	public List<CourseRecommend> getCourseRecommends() {
+		return this.courseRecommends;
+	}
+
+	/**
+	 * Sets the field called 'courseRecommends' to the given value.
+	 * @param courseRecommends The courseRecommends to set.
+	 */
+	public void setCourseRecommends(List<CourseRecommend> courseRecommends) {
+		this.courseRecommends = courseRecommends;
+	}
 }
